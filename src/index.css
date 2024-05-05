@@ -1,0 +1,146 @@
+body,
+html {
+  overflow-x: hidden;
+}
+
+.announce {
+  background-color: #e91e63;
+  padding: 10px 15px;
+}
+.announce a {
+  font-size: 14px;
+  padding-left: 5rem;
+}
+.discont-sec {
+  padding-right: 51px;
+}
+
+.announce div {
+  font-size: 14px;
+
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+span.disnum {
+  color: #ec0101;
+}
+.top_wrap.d-flex {
+  padding: 10px 15px;
+  min-height: 45px;
+  font-size: 13px;
+  background: #f6f6f8;
+}
+.top_wrap {
+  color: #878787;
+}
+.top_wrap img {
+  width: 14px;
+}
+.top_wrap a {
+  color: #878787;
+}
+.top_wrap a {
+  padding: 0px 10px;
+}
+.top_wrap a {
+  padding: 0px 10px;
+}
+.location a {
+  padding: 0px;
+}
+.language select:hover {
+  color: #56cfe1;
+}
+.language select {
+  word-wrap: normal;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+  background: transparent;
+  color: #000000ab;
+}
+.top-wrap-btn {
+  transition: all 0.3s;
+}
+.hover a:hover {
+  color: #56cfe1;
+}
+.logo img {
+  width: 95px;
+}
+ul.main-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-header {
+  padding: 18px 15px;
+  box-shadow: -1px 4px 5px 0px #8080801a;
+}
+li.menu-list a {
+  padding: 5px 17.5px;
+}
+.hover a {
+  transition: all 0.3s;
+}
+.icon-link img {
+  width: 22px;
+}
+.icon-link a {
+  padding: 0px 8px;
+}
+/* Main Banner */
+.banner-img img {
+  width: 1364px;
+  height: 600px;
+  object-fit: cover;
+}
+.banner-content {
+  position: absolute;
+  top: 260px;
+  padding: 15px;
+  margin: 0px 31px;
+}
+.banner-season {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.banner-heading {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 57px;
+}
+
+.banner-btn {
+  width: fit-content;
+  position: relative;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  z-index: 9;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.banner-btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #01bad4;
+  z-index: -1;
+  width: 100%;
+  opacity: 0;
+  height: 0;
+  transition: all 0.4s;
+}
+.banner-btn:hover::before {
+  height: 100%;
+  opacity: 1;
+}
