@@ -8,7 +8,7 @@ const Banner = () => {
     arrow: false,
     infinite: true,
     speed: 500,
-    autoplay: false,
+    autoplay: true,
     fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,

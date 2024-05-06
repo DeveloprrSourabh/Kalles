@@ -99,6 +99,9 @@ li.menu-list a {
   height: 600px;
   object-fit: cover;
 }
+.banner-img {
+  overflow: hidden;
+}
 .banner-content {
   position: absolute;
   top: 260px;
@@ -108,24 +111,45 @@ li.menu-list a {
 .banner-season {
   text-transform: uppercase;
   letter-spacing: 2px;
+  transition: all 2s;
   font-weight: 600;
+  opacity: 0;
+  transform: translateY(-53px);
+}
+.slick-current .banner-season {
+  opacity: 1;
+  transform: translate(0px);
 }
 .banner-heading {
   text-transform: capitalize;
   font-weight: 700;
   font-size: 54px;
+  transition: all 2s;
+  transform: translateX(-70px);
   line-height: 57px;
+  opacity: 0;
+}
+.slick-current .banner-heading {
+  opacity: 1;
+  transform: translate(0px);
 }
 
 .banner-btn {
   width: fit-content;
   position: relative;
+  transition: all 2s;
+  transform: translateY(50px);
+  opacity: 0;
   background: #000;
   color: #fff;
   padding: 10px 20px;
   z-index: 9;
   cursor: pointer;
   margin-top: 10px;
+}
+.slick-current .banner-btn {
+  opacity: 1;
+  transform: translate(0px);
 }
 
 .banner-btn::before {
@@ -143,4 +167,42 @@ li.menu-list a {
 .banner-btn:hover::before {
   height: 100%;
   opacity: 1;
+}
+/* Category Section */
+.cate-img {
+  overflow: hidden;
+  position: relative;
+  /* margin: 20px 0px; */
+}
+.cate-img img {
+  width: 100%;
+  transition: all 1s;
+  transform: scale(1);
+}
+.cate-img:hover img {
+  transform: scale(1.1);
+}
+.cate-name {
+  position: absolute;
+  bottom: 33px;
+  background: #fff;
+  padding: 10px 30px;
+  font-weight: 500;
+  transition: all 0.5s;
+
+  text-transform: capitalize;
+}
+.cate-name:hover {
+  background-color: #000;
+  color: #ffffff;
+}
+.cate-deco {
+  text-align: center;
+  font-family: cursive;
+  font-size: 20px;
+  font-weight: 800;
+  -webkit-text-fill-color: #0000;
+  background: -webkit-linear-gradient(15deg, #ff5d55, #cdc3ff 80%);
+  -webkit-background-clip: text;
+  color: #ff0a0a;
 }
