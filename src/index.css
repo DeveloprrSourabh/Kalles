@@ -206,3 +206,132 @@ li.menu-list a {
   -webkit-background-clip: text;
   color: #ff0a0a;
 }
+.heading {
+  -webkit-text-fill-color: #0000;
+  background: -webkit-linear-gradient(15deg, #ff5d55, #cdc3ff 80%);
+  -webkit-background-clip: text;
+  color: #ff0a0a;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+/* Product Section */
+.main-heading {
+  width: fit-content;
+}
+img.leaf-img {
+  width: 40px;
+  position: relative;
+  left: 172px;
+  bottom: 9px;
+}
+
+img.leaf-img2 {
+  width: 40px;
+  position: relative;
+  left: -172px;
+  bottom: -4px;
+  rotate: 181deg;
+}
+.sub-heading {
+  font-size: 16px;
+  font-weight: 500;
+  color: #00000078;
+  font-family: cursive;
+}
+.product-option img {
+  width: 20px;
+}
+img.first-img {
+  position: absolute;
+  width: 100%;
+  transition: all 0.7s;
+  height: 100%;
+}
+img.second-img {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.7s;
+}
+
+.product-option {
+  z-index: 99;
+  bottom: 149px;
+  width: -webkit-fill-available;
+  text-align: center;
+  transition: all 0.5s;
+  opacity: 0;
+  transform: translateY(-50px);
+}
+.product-card:hover .product-option {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-card {
+  overflow: hidden;
+}
+.product-card-heart {
+  background: white;
+  width: fit-content;
+  position: relative;
+  top: -50px;
+  left: 11px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+.first-option {
+  background: #fff;
+  width: fit-content;
+  margin: auto;
+  padding: 4px;
+  overflow: hidden;
+  height: 35px;
+  width: 150px;
+  cursor: pointer;
+  border-radius: 40px;
+  position: relative;
+  font-weight: 400;
+  transition: all 0.5s;
+}
+.option-name,
+.option-icon {
+  transition: all 0.3s;
+}
+.option-icon {
+  opacity: 0;
+  position: absolute;
+  left: 70px;
+  z-index: 99;
+}
+.first-option:hover .option-name {
+  transform: translateY(-30px);
+  opacity: 0;
+}
+.first-option:hover .option-icon {
+  opacity: 1;
+  position: absolute;
+  transform: translateY(-24px);
+}
+.first-option:before {
+  content: "";
+  position: absolute;
+  background-color: #eea7a7;
+  width: 100%;
+  left: 0;
+  height: 0px;
+  bottom: 0;
+  transition: 0.3s;
+}
+.first-option:hover:before {
+  height: 100%;
+}
+.product-card-link:hover .first-img {
+  opacity: 0;
+}
+.product-card-link:hover .second-img {
+  opacity: 1;
+}
