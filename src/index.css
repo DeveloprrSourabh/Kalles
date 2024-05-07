@@ -258,7 +258,7 @@ img.second-img {
 
 .product-option {
   z-index: 99;
-  bottom: 149px;
+  bottom: 205px;
   width: -webkit-fill-available;
   text-align: center;
   transition: all 0.5s;
@@ -334,4 +334,69 @@ img.second-img {
 }
 .product-card-link:hover .second-img {
   opacity: 1;
+}
+.product-card-name {
+  font-weight: 500;
+  font-size: 15px;
+}
+.card-color {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.card-color:hover {
+  transform: scale(1.1);
+}
+.card-img img {
+  width: 100%;
+  transition: all 0.5s;
+  transform: scale(1), rotate(0);
+}
+.card-img {
+  overflow: hidden;
+}
+.card-img:hover img {
+  transform: rotate(40deg) scale(1.7);
+}
+.card-caption {
+  top: 30%;
+  left: 30%;
+  color: #fff;
+  backdrop-filter: blur(15px);
+  padding: 20px;
+}
+/* Blog start */
+.blog-card-img img {
+  width: 100%;
+  transition: all 1s;
+  transform: scale(1);
+}
+.blog-card-img {
+  overflow: hidden;
+}
+.blog-card-img:hover img {
+  transform: scale(1.1);
+}
+.blog-card-heading {
+  font-weight: 500;
+  font-size: 18px;
+}
+.blog-card-desc {
+  font-size: 16px;
+}
+/* Social Start */
+.social-slider {
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.social-slider:hover img {
+  transform: scale(1.1);
+}
+.social-slider img {
+  transition: all 0.5s;
+  transform: scale(1);
+  width: 100%;
 }
