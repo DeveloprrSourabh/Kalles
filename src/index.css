@@ -400,3 +400,63 @@ img.second-img {
   transform: scale(1);
   width: 100%;
 }
+
+/* Footer */
+.footer-card-img img {
+  width: 50px;
+  height: 32px;
+}
+.car-img {
+  height: 44px !important;
+}
+.footer-card-detail h2 {
+  font-size: 16px;
+}
+.footer-card-caption {
+  font-size: 14px;
+}
+.footer-contact-desc {
+  font-size: 15px;
+  color: #878787;
+}
+.footer-menu-bar h2 {
+  font-size: 18px;
+}
+ul.footer-menu-list {
+  list-style: none;
+}
+.footer-form input {
+  outline: none;
+  border: none;
+  padding: 8px 10px;
+  min-width: 62%;
+}
+button.form-btn {
+  text-transform: none;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 10px;
+  margin: 0;
+  line-height: 24px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  text-align: center;
+  min-width: 111px;
+}
+.footer-input {
+  border: 1px solid;
+  padding: 6px 20px 6px 0px;
+  border-radius: 26px;
+  overflow: hidden;
+}
+.footer-site-name {
+  color: #56cfe1 !important;
+}
+.main-footer {
+  background-color: #f6f6f8;
+}
