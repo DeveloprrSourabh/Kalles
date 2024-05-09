@@ -9,11 +9,7 @@ const Trending = () => {
         <div className="trendings mx-5 py-3 my-5">
           <div className="section-heading my-3">
             <div className="cate-deco mt-3 heading">
-              <div className="main-heading mx-auto">
-                <img className="leaf-img" src="./images/flower.png" alt="" />
-                TRENDING
-                <img className="leaf-img2" src="./images/flower.png" alt="" />
-              </div>
+              <div className="main-heading mx-auto">TRENDING</div>
             </div>
             <div className="sub-heading my-2 text-center">
               Top view in this week

@@ -81,6 +81,20 @@ ul.main-menu {
   padding: 18px 15px;
   box-shadow: -1px 4px 5px 0px #8080801a;
 }
+.dropdown-toggle {
+  outline: none;
+  background-color: transparent;
+  color: #878787;
+  border: none;
+}
+.dropdown-menu {
+  border-radius: 0;
+  border: none;
+  box-shadow: 0px 0px 3px 0px #00000045;
+}
+.dropdown-menu a {
+  padding: 7px 10px;
+}
 li.menu-list a {
   padding: 5px 17.5px;
 }
@@ -189,11 +203,10 @@ li.menu-list a {
   padding: 10px 30px;
   font-weight: 500;
   transition: all 0.5s;
-
   text-transform: capitalize;
 }
 .cate-name:hover {
-  background-color: #000;
+  background-color: #56cfe1;
   color: #ffffff;
 }
 .cate-deco {
@@ -208,7 +221,7 @@ li.menu-list a {
 }
 .heading {
   -webkit-text-fill-color: #0000;
-  background: -webkit-linear-gradient(15deg, #ff5d55, #cdc3ff 80%);
+  background: -webkit-linear-gradient(7deg, #ff1306, #56cfe1 70%);
   -webkit-background-clip: text;
   color: #ff0a0a;
   font-family: sans-serif;
@@ -220,20 +233,7 @@ li.menu-list a {
 .main-heading {
   width: fit-content;
 }
-img.leaf-img {
-  width: 40px;
-  position: relative;
-  left: 172px;
-  bottom: 9px;
-}
 
-img.leaf-img2 {
-  width: 40px;
-  position: relative;
-  left: -172px;
-  bottom: -4px;
-  rotate: 181deg;
-}
 .sub-heading {
   font-size: 16px;
   font-weight: 500;
@@ -319,7 +319,7 @@ img.second-img {
 .first-option:before {
   content: "";
   position: absolute;
-  background-color: #eea7a7;
+  background-color: #56cfe1;
   width: 100%;
   left: 0;
   height: 0px;
@@ -459,4 +459,21 @@ button.form-btn {
 }
 .main-footer {
   background-color: #f6f6f8;
+}
+
+/* Mobile Responsive */
+@media only screen and (max-width: 377px) {
+  .announce a {
+    padding: 0;
+  }
+  .header-list {
+    position: absolute;
+    background: #fff;
+    width: 70%;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 99;
+    box-shadow: 1px 1px 9px 0px #000000c7;
+  }
 }

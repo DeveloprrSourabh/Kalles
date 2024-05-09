@@ -17,22 +17,29 @@ const Header = () => {
             Today deal sale off <b>70%</b>. End in . Hurry Up
             <img src="./images/arrow.svg" alt="" />
           </Link>
-          <div className="announce-close text-light ">Close ✕</div>
+          <div
+            onClick={() => {
+              announceRef.current.classList.add("d-none");
+            }}
+            className="announce-close text-light "
+          >
+            Close ✕
+          </div>
         </div>
         {/* top bar */}
         <div className="top-bar hover">
-          <div className="top_wrap d-flex justify-content-between align-content-center">
-            <div className="contact-top">
+          <div className="top_wrap d-flex justify-content-between align-content-center flex-column  flex-sm-row">
+            <div className="contact-top d-none d-sm-block">
               <Link to="tel:+01 23456789">
-                <img src="./images/phone.svg" alt="" />
+                <img className="mx-2" src="./images/phone.svg" alt="" />
                 +01 23456789
               </Link>
               <Link to="mailto:Kalles@domain.com">
-                <img src="./images/email.svg" alt="" />
+                <img className="mx-2" src="./images/email.svg" alt="" />
                 Kalles@domain.com
               </Link>
             </div>
-            <div className="discont-sec">
+            <div className="discont-sec p-0 pe-sm-5">
               Summer sale discount off <span className="disnum">50% </span>!
               <span className="top-btn">
                 <Link className="top-wrap-btn">Shop Now</Link>
@@ -44,21 +51,45 @@ const Header = () => {
                 <Link>Location</Link>
               </div>
               <div className="language">
-                <select name="" id="">
-                  <option value="">English</option>
-                </select>
+                <div class="dropdown">
+                  <button
+                    class="dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Language
+                  </button>
+                  <ul class="dropdown-menu py-2">
+                    <li>
+                      <Link class="dropdown-item" href="#">
+                        Action
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" href="#">
+                        Another action
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" href="#">
+                        Something else here
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
         {/* Main hard */}
         <div className="main-header">
-          <div className="last-header d-flex">
+          <div className="last-header d-flex justify-content-between">
             <div className="logo">
               <img src="./images/logo.avif" alt="main-logo" />
             </div>
             <div className="header-list">
-              <ul className="main-menu d-flex hover">
+              <ul className="main-menu d-flex flex-sm-row flex-column align-items-sm-center  align-items-start hover">
                 <li className="menu-list">
                   <Link to={""}>Home</Link>
                 </li>
@@ -79,22 +110,22 @@ const Header = () => {
             <div className="header-icons">
               <div className="icon-link">
                 <Link>
-                  <img src="./images/location.svg" alt="" />
+                  <img src="./images/search.svg" alt="" />
                 </Link>
               </div>
               <div className="icon-link">
                 <Link>
-                  <img src="./images/location.svg" alt="" />
+                  <img src="./images/profile.svg" alt="" />
                 </Link>
               </div>
               <div className="icon-link">
                 <Link>
-                  <img src="./images/location.svg" alt="" />
+                  <img src="./images/wish.svg" alt="" />
                 </Link>
               </div>
               <div className="icon-link">
                 <Link>
-                  <img src="./images/location.svg" alt="" />
+                  <img src="./images/cart.svg" alt="" />
                 </Link>
               </div>
             </div>
