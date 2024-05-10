@@ -91,19 +91,22 @@ const Header = () => {
             <div className="header-list">
               <ul className="main-menu d-flex flex-sm-row flex-column align-items-sm-center  align-items-start hover">
                 <li className="menu-list">
-                  <Link to={""}>Home</Link>
+                  <Link to={"/"}>Home</Link>
                 </li>
                 <li className="menu-list">
-                  <Link to={""}>Shop</Link>
+                  <Link to={"/shop"}>Shop</Link>
                 </li>
                 <li className="menu-list">
-                  <Link to={""}>About</Link>
+                  <Link to={"/collection"}>Collections</Link>
                 </li>
                 <li className="menu-list">
-                  <Link to={""}>Blog</Link>
+                  <Link to={"/about"}>About</Link>
                 </li>
                 <li className="menu-list">
-                  <Link to={""}>Contact Us</Link>
+                  <Link to={"/blog"}>Blog</Link>
+                </li>
+                <li className="menu-list">
+                  <Link to={"/contact"}>Contact Us</Link>
                 </li>
               </ul>
             </div>

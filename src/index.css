@@ -430,6 +430,7 @@ ul.footer-menu-list {
   border: none;
   padding: 8px 10px;
   min-width: 62%;
+  background: transparent;
 }
 button.form-btn {
   text-transform: none;
@@ -450,9 +451,18 @@ button.form-btn {
 }
 .footer-input {
   border: 1px solid;
-  padding: 6px 20px 6px 0px;
+  padding: 4px 10px 4px 0px;
   border-radius: 26px;
   overflow: hidden;
+}
+.filter-row {
+  padding: 0px 13px;
+}
+.first-footer {
+  display: none;
+}
+#home-page .first-footer {
+  display: block !important;
 }
 .footer-site-name {
   color: #56cfe1 !important;
@@ -460,7 +470,39 @@ button.form-btn {
 .main-footer {
   background-color: #f6f6f8;
 }
+/* Page-banner */
+.page-name {
+  top: 45%;
+  left: 47%;
+  font-weight: 600;
+  color: #fff;
+  font-size: 20px;
+  z-index: 99;
+}
+.page-banner-content:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+.page-banner-content {
+  height: 150px;
+  overflow: hidden;
+}
 
+#filter2 {
+  padding: 6px 15px;
+  border: 1px solid;
+  border-radius: 30px;
+  overflow: hidden;
+}
+#filter2::after {
+  margin-left: 20px;
+}
 /* Mobile Responsive */
 @media only screen and (max-width: 377px) {
   .announce a {
