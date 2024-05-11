@@ -5,7 +5,7 @@ const PageBanner = ({ name }) => {
     <div id="page-banner">
       <div className="page-banner-content position-relative">
         <img src="./images/bg-heading.jpg" alt="" />
-        <div className="page-name position-absolute">Collection</div>
+        <div className="page-name position-absolute">{name}</div>
       </div>
     </div>
   );

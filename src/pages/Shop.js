@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import PageBanner from "../components/PageBanner";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Productcard from "../components/Productcard";
 const Shop = () => {
+  const location = useLocation();
+  const page = location.pathname.replace("/", "");
   return (
     <>
       <Layout>
         <section id="shop-page">
           <section id="page-banner">
-            <PageBanner />
+            <PageBanner name={page} />
           </section>
           <div className="shop-page-start  mx-5 py-3 my-5">
             <div className="filter-row  d-flex hover justify-content-between">
               <div id="filter1" className="first-filter ">
-                <Link className="footer-contact-desc">Filter</Link>
+                <Link className="d-flex gap-1 footer-contact-desc">
+                  <img src="./images/filter.svg" width={"16px"} alt="" />
+                  Filter
+                </Link>
               </div>
               <div className="second-filter">
                 <div class="dropdown">

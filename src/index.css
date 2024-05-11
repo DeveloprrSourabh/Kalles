@@ -473,6 +473,7 @@ button.form-btn {
 /* Page-banner */
 .page-name {
   top: 45%;
+  text-transform: capitalize;
   left: 47%;
   font-weight: 600;
   color: #fff;
@@ -503,6 +504,12 @@ button.form-btn {
 #filter2::after {
   margin-left: 20px;
 }
+/* About Page */
+#shop-page .first-footer {
+  display: block;
+  box-shadow: 1px 1px 15px 0px #0000002e;
+}
+
 /* Mobile Responsive */
 @media only screen and (max-width: 377px) {
   .announce a {

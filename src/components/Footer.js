@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <>
       <footer id="footer ">
-        <div className="first-footer mx-5 py-5 ">
+        <div className="first-footer p-5 ">
           <div className="row">
             <div className="col-lg-3">
-              <div className="footer-card d-flex align-items-start">
+              <div className="footer-card d-flex align-items-start mx-3">
                 <div className="footer-card-img">
                   <img className="car-img" src="./images/car.svg" alt="" />
                 </div>
-                <div className="footer-card-detail ps-4">
+                <div className="footer-card-detail ps-3">
                   <h2 className="mb-1">FREE SHIPPING</h2>
                   <div className=" text-secondary footer-card-caption">
                     Free shipping on all US order or order above $100
@@ -21,11 +21,11 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-lg-3">
-              <div className="footer-card d-flex align-items-start">
+              <div className="footer-card d-flex align-items-start mx-3">
                 <div className="footer-card-img">
                   <img src="./images/support.svg" alt="" />
                 </div>
-                <div className="footer-card-detail ps-4">
+                <div className="footer-card-detail ps-3">
                   <h2 className="mb-1">SUPPORT 24/7</h2>
                   <div className=" text-secondary footer-card-caption">
                     Contact us 24 hours a day, 7 days a week
@@ -34,11 +34,11 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-lg-3">
-              <div className="footer-card d-flex align-items-start">
+              <div className="footer-card d-flex align-items-start mx-3">
                 <div className="footer-card-img">
                   <img src="./images/return.svg" alt="" />
                 </div>
-                <div className="footer-card-detail ps-4">
+                <div className="footer-card-detail ps-3">
                   <h2 className="mb-1">30 DAYS RETURN</h2>
                   <div className=" text-secondary footer-card-caption">
                     Simply return it within 30 days for an exchange.
@@ -47,11 +47,11 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-lg-3">
-              <div className="footer-card d-flex align-items-start">
+              <div className="footer-card d-flex align-items-start mx-3">
                 <div className="footer-card-img">
                   <img src="./images/secure.svg" alt="" />
                 </div>
-                <div className="footer-card-detail ps-4">
+                <div className="footer-card-detail ps-3">
                   <h2 className="mb-1">100% PAYMENT SECURE</h2>
                   <div className=" text-secondary footer-card-caption">
                     We ensure secure payment with PEV

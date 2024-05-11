@@ -1,14 +1,17 @@
 import React from "react";
 import Layout from "../components/Layout";
 import PageBanner from "../components/PageBanner";
+import { useLocation } from "react-router-dom";
 
 const Collection = () => {
+  const location = useLocation();
+  const page = location.pathname.replace("/", "");
   return (
     <>
       <Layout>
         <section id="collection-page">
           <section className="page-banner">
-            <PageBanner />
+            <PageBanner name={page} />
           </section>
           <div className="mx-5 py-3 my-5">
             <div className="row row-gap-4">
