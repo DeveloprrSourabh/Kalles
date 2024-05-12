@@ -564,7 +564,7 @@ button.form-btn {
   left: 0;
 }
 .main-filters {
-  max-height: 90vh;
+  max-height: 100vh;
   overflow-y: auto;
 }
 .main-filters ul {
