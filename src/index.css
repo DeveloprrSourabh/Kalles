@@ -1,8 +1,26 @@
 body,
 html {
   overflow-x: hidden;
+  position: relative;
 }
-
+.active {
+  overflow: hidden;
+}
+.active > body:before {
+  content: "";
+  position: absolute;
+  width: 100% !important;
+  height: 100%;
+  background-color: #000;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.2;
+}
+.color-filter:hover {
+  width: 30px;
+  height: 30px;
+}
 .announce {
   background-color: #e91e63;
   padding: 10px 15px;
@@ -315,6 +333,12 @@ img.second-img {
   opacity: 1;
   position: absolute;
   transform: translateY(-24px);
+  filter: brightness(2) invert(1);
+}
+
+.footer-contact-desc:hover img {
+  filter: drop-shadow(0px 1000px 0 #56cfe1);
+  transform: translateY(-1000px);
 }
 .first-option:before {
   content: "";
@@ -504,6 +528,81 @@ button.form-btn {
 #filter2::after {
   margin-left: 20px;
 }
+
+.filter-drawer li {
+  cursor: pointer;
+  list-style: none;
+}
+.filter-drawer li label {
+  transition: all 0.3s;
+  font-size: 15px;
+  color: #000;
+}
+.filter-drawer li label:hover {
+  color: #56cfe1;
+}
+*,
+::after,
+::before {
+  cursor: pointer;
+}
+.footer-contact-desc:hover {
+  color: #56cfe1;
+}
+.filter-drawer.hover {
+  position: absolute;
+  top: 0;
+  left: -30%;
+  z-index: 999;
+  background: #fff;
+  width: 30%;
+  height: 100%;
+  transition: all 0.5s;
+  box-shadow: 1px 1px 20px 0px #00000066;
+}
+.filter-drawer.hover.active {
+  left: 0;
+}
+.main-filters {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.main-filters ul {
+  max-height: 250px;
+  overflow-y: auto;
+}
+.main-filter-heading h2 {
+  font-size: 18px;
+  margin: 0;
+}
+.avaiable {
+  padding: 20px;
+  border-top: 1px solid #0000004d;
+  border-bottom: 1px solid #0000004d;
+}
+.avaiable h2 {
+  font-size: 18px;
+  margin: 0;
+}
+.main-filter-heading {
+  padding: 15px 20px;
+}
+.avaiable h2 {
+  font-size: 18px;
+  margin: 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid black;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+.color-filter {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
 /* About Page */
 #shop-page .first-footer {
   display: block;
