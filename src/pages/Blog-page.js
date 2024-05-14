@@ -3,8 +3,9 @@ import PageBanner from "../components/PageBanner";
 import Layout from "../components/Layout";
 import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
+import Blog from "../components/Blog";
 
-const Blog = () => {
+const Blogpage = () => {
   // Blog Slider
   var settings = {
     dots: false,
@@ -41,16 +42,11 @@ const Blog = () => {
       },
     ],
   };
-  const location = useLocation();
-  const page = location.pathname.replace("/", "");
+
   return (
     <>
       <section id="blog-page">
         <Layout>
-          {" "}
-          <section className="page-banner">
-            <PageBanner name={page} />
-          </section>
           <div className="">
             <Slider {...settings}>
               <div className="blog-slider">
@@ -61,15 +57,12 @@ const Blog = () => {
                     </div>
                   </a>
                   <div class="blog-card-detail blog-page-desc">
+                    <div class="blog-card-date ">
+                      Uploaded <span class="text-secondary">on</span> May 11,
+                      2024
+                    </div>
                     <div class="blog-card-heading hover pt-2">
                       <a href="/">Spring – Summer Trending 2020</a>
-                    </div>
-
-                    <div class="text-black blog-card-desc">
-                      <p>
-                        Typography is the work of typesetters, compositors,
-                        typographers, graphic designers, art directors...
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -82,15 +75,12 @@ const Blog = () => {
                     </div>
                   </a>
                   <div class="blog-card-detail blog-page-desc">
+                    <div class="blog-card-date ">
+                      Uploaded <span class="text-secondary">on</span> May 11,
+                      2024
+                    </div>
                     <div class="blog-card-heading hover pt-2">
                       <a href="/">Spring – Summer Trending 2020</a>
-                    </div>
-
-                    <div class="text-black blog-card-desc">
-                      <p>
-                        Typography is the work of typesetters, compositors,
-                        typographers, graphic designers, art directors...
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -103,15 +93,12 @@ const Blog = () => {
                     </div>
                   </a>
                   <div class="blog-card-detail blog-page-desc">
+                    <div class="blog-card-date ">
+                      Uploaded <span class="text-secondary">on</span> May 11,
+                      2024
+                    </div>
                     <div class="blog-card-heading hover pt-2">
                       <a href="/">Spring – Summer Trending 2020</a>
-                    </div>
-
-                    <div class="text-black blog-card-desc">
-                      <p>
-                        Typography is the work of typesetters, compositors,
-                        typographers, graphic designers, art directors...
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -124,15 +111,12 @@ const Blog = () => {
                     </div>
                   </a>
                   <div class="blog-card-detail blog-page-desc">
+                    <div class="blog-card-date ">
+                      Uploaded <span class="text-secondary">on</span> May 11,
+                      2024
+                    </div>
                     <div class="blog-card-heading hover pt-2">
                       <a href="/">Spring – Summer Trending 2020</a>
-                    </div>
-
-                    <div class="text-black blog-card-desc">
-                      <p>
-                        Typography is the work of typesetters, compositors,
-                        typographers, graphic designers, art directors...
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -145,20 +129,20 @@ const Blog = () => {
                     </div>
                   </a>
                   <div class="blog-card-detail blog-page-desc">
+                    <div class="blog-card-date ">
+                      Uploaded <span class="text-secondary">on</span> May 11,
+                      2024
+                    </div>
                     <div class="blog-card-heading hover pt-2">
                       <a href="/">Spring – Summer Trending 2020</a>
-                    </div>
-
-                    <div class="text-black blog-card-desc">
-                      <p>
-                        Typography is the work of typesetters, compositors,
-                        typographers, graphic designers, art directors...
-                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </Slider>
+          </div>{" "}
+          <div className="all-blog">
+            <Blog />
           </div>
         </Layout>
       </section>
@@ -166,4 +150,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Blogpage;

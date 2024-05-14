@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Blog = () => {
   return (
     <>
-      <div className="mx-5 py-3 my-5">
+      <div className="mx-5 py-3 my-5 main-blogs">
         <div className="div-heading my-3">
           <div className="cate-deco mt-3 heading">
             <div className="main-heading mx-auto">LATES FROM BLOG</div>
