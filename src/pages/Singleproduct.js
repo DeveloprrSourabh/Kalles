@@ -1,9 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
-import Slider from "react-slick";
+import $ from "jquery";
 
 const Singleproduct = () => {
+  const [imgurl, setImgurl] = useState("/images/prod11.webp");
+  $(".tabs").click(function () {
+    var contClass = $(this).data("div");
+
+    $(".content")
+      .hide()
+      .filter("." + contClass)
+      .show();
+    $(".tabs").removeClass("active");
+    $(this).addClass("active");
+  });
   // Single Product Slider
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
@@ -26,62 +37,41 @@ const Singleproduct = () => {
           </div>
           <div className="singleproduct-row row  mx-5 py-3 my-5">
             <div className="col-lg-6">
-              <div className="single-pro-slider">
-                <Slider asNavFor={nav2} ref={(slider) => (sliderRef1 = slider)}>
-                  <div>
-                    <div className="pro-slider-start">
-                      <div className="main-product-slide">
-                        <div className="pro-slide-img">
-                          <img src="/images/prod11.webp" alt="image" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="pro-slider-start">
-                      <div className="main-product-slide">
-                        <div className="pro-slide-img">
-                          <img src="/images/prod11.webp" alt="image" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="pro-slider-start">
-                      <div className="main-product-slide">
-                        <div className="pro-slide-img">
-                          <img src="/images/prod11.webp" alt="image" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Slider>
-                <div className="py-3">
-                  {" "}
-                  <Slider
-                    //   arrows={false}
-                    asNavFor={nav1}
-                    ref={(slider) => (sliderRef2 = slider)}
-                    slidesToShow={6}
-                    swipeToSlide={false}
-                    focusOnSelect={true}
+              <div className="single-pro-slider d-flex gap-4">
+                {/* small img */}
+                <div className="single-pro-min">
+                  <div
+                    className="single-pro-multi-img mb-2"
+                    onClick={() => setImgurl("/images/prod1.webp")}
                   >
-                    <div>
-                      <div className="single-pro-multi-img">
-                        <img src="/images/prod1.webp" alt="" />
-                      </div>
+                    <img src="/images/prod1.webp" alt="" />
+                  </div>
+                  <div
+                    className="single-pro-multi-img mb-2"
+                    onClick={() => setImgurl("/images/prod11.webp")}
+                  >
+                    <img src="/images/prod11.webp" alt="" />
+                  </div>
+                  <div
+                    className="single-pro-multi-img mb-2"
+                    onClick={() => setImgurl("/images/prod2.webp")}
+                  >
+                    <img src="/images/prod2.webp" alt="" />
+                  </div>
+                  <div
+                    className="single-pro-multi-img mb-2"
+                    onClick={() => setImgurl("/images/prod22.webp")}
+                  >
+                    <img src="/images/prod22.webp" alt="" />
+                  </div>
+                </div>
+                {/* Single big img */}
+                <div className="pro-slider-start">
+                  <div className="main-product-slide">
+                    <div className="pro-slide-img">
+                      <img src={imgurl} alt="image" />
                     </div>
-                    <div>
-                      <div className="single-pro-multi-img">
-                        <img src="/images/prod1.webp" alt="" />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="single-pro-multi-img">
-                        <img src="/images/prod1.webp" alt="" />
-                      </div>
-                    </div>
-                  </Slider>
+                  </div>
                 </div>
               </div>
             </div>
@@ -145,11 +135,11 @@ const Singleproduct = () => {
                     <span className="que">SKU:</span>{" "}
                     <span className="ans">Sport Clothes-1</span>
                   </div>
-                  <div className="single-pro-detail py-2">
+                  <div className="single-pro-detail py-1">
                     <span className="que">Availability: </span>{" "}
                     <span className="ans">In Stock</span>
                   </div>
-                  <div className="single-pro-detail py-2">
+                  <div className="single-pro-detail py-1">
                     <span className="que">Categories: </span>{" "}
                     <span className="ans">
                       <Link> Men</Link>
@@ -166,7 +156,82 @@ const Singleproduct = () => {
               </div>
             </div>
           </div>
-          <div className="single-pro-all-details"></div>
+          <div className="single-pro-tab">
+            <div className="pro-details-tab">
+              <div className="all-tabs d-flex gap-4 justify-content-center">
+                <Link data-div="div-one" className="tabs active">
+                  Description
+                </Link>
+                <Link data-div="div-two" className="tabs">
+                  Additional Information
+                </Link>
+                <Link data-div="div-three" className="tabs">
+                  Reviews
+                </Link>
+              </div>
+              <div className="description-tab pt-4">
+                <div class="div-one content">
+                  <div class="single-pro-desc pb-4">
+                    Go sporty this summer with this vintage navy and white
+                    striped v-neck t-shirt from the Abercrombie & Fitch. Perfect
+                    for pairing with denim and white kicks for a stylish sporty
+                    vibe. Will fit a UK 8-10, model shown is a UK 8 and 5’5. !!
+                  </div>
+                  <div class="single-pro-desc pb-4">
+                    Typography is the work of typesetters, compositors,
+                    typographers, graphic designers, art directors, manga
+                    artists, comic book artists, graffiti artists, and
+                    now—anyone who arranges words, letters, numbers, and symbols
+                    for publication, display, or distribution—from clerical
+                    workers and newsletter writers to anyone self-publishing
+                    materials.
+                  </div>
+                  <div class="sub-heading my-2 text-black">
+                    Neque porro quisquam est qui dolorem ipsum quia dolor sit
+                    amet, consectetur, adipisci velit...
+                  </div>
+                  <div class="single-pro-desc pb-4">
+                    Hit your next boxing workout with a combination it’s never
+                    seen before in the Combat Drop Arm Tank, including a
+                    freedom-instilling regular fit and dropped armhole to allow
+                    you to throw jabs and hooks at the punching bag with ease. A
+                    lightweight material keeps you fighting fit, and fresh.
+                  </div>
+                  <div class="single-pro-desc pb-4">
+                    Design inspiration lorem ipsum dolor sit amet, consectetuer
+                    adipiscing elit. Morbi commodo, ipsum sed pharetra gravida,
+                    orci magna rhoncus neque, id pulvinar odio lorem non turpis.
+                    Nullam sit amet enim. Suspendisse id velit vitae ligula
+                    volutpat condimentum. Aliquam erat volutpat. Sed quis velit.
+                    Nulla facilisi. Nulla libero. Vivamus pharetra posuere
+                    sapien. Nam consectetuer. Sed aliquam, nunc eget euismod
+                    ullamcorper, lectus nunc ullamcorper orci.
+                  </div>
+                </div>
+
+                <div class="div-two  content">
+                  <table className="single-pro-table">
+                    <tbody>
+                      <tr>
+                        <th className="">Size</th>
+                        <td>
+                          <p className=" m-0">S, M, L, XL, 2XL</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th className="">Color</th>
+                        <td>
+                          <p className=" m-0">Black, Blue, Violet</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="div-three content">Div #3</div>
+              </div>
+            </div>
+          </div>
         </Layout>
       </section>
     </>
