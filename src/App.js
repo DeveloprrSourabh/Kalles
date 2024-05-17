@@ -7,6 +7,7 @@ import Collection from "./pages/Collection";
 import Contact from "./pages/Contact";
 import Blogpage from "./pages/Blog-page";
 import Singleproduct from "./pages/Singleproduct";
+import Singleblog from "./pages/Singleblog";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/shop/:id" element={<Singleproduct />} />
+        <Route path="/blog/:id" element={<Singleblog />} />
       </Routes>
     </>
   );

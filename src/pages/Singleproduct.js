@@ -2,6 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import {
+  Magnifier,
+  GlassMagnifier,
+  SideBySideMagnifier,
+  PictureInPictureMagnifier,
+  MOUSE_ACTIVATION,
+  TOUCH_ACTIVATION,
+  MagnifierContainer,
+  MagnifierPreview,
+  MagnifierZoom,
+} from "react-image-magnifiers";
 
 const Singleproduct = () => {
   const [imgurl, setImgurl] = useState("/images/prod11.webp");
@@ -42,25 +53,25 @@ const Singleproduct = () => {
                 <div className="single-pro-min">
                   <div
                     className="single-pro-multi-img mb-2"
-                    onClick={() => setImgurl("/images/prod1.webp")}
+                    onMouseOver={() => setImgurl("/images/prod1.webp")}
                   >
                     <img src="/images/prod1.webp" alt="" />
                   </div>
                   <div
                     className="single-pro-multi-img mb-2"
-                    onClick={() => setImgurl("/images/prod11.webp")}
+                    onMouseOver={() => setImgurl("/images/prod11.webp")}
                   >
                     <img src="/images/prod11.webp" alt="" />
                   </div>
                   <div
                     className="single-pro-multi-img mb-2"
-                    onClick={() => setImgurl("/images/prod2.webp")}
+                    onMouseOver={() => setImgurl("/images/prod2.webp")}
                   >
                     <img src="/images/prod2.webp" alt="" />
                   </div>
                   <div
                     className="single-pro-multi-img mb-2"
-                    onClick={() => setImgurl("/images/prod22.webp")}
+                    onMouseOver={() => setImgurl("/images/prod22.webp")}
                   >
                     <img src="/images/prod22.webp" alt="" />
                   </div>
@@ -68,9 +79,16 @@ const Singleproduct = () => {
                 {/* Single big img */}
                 <div className="pro-slider-start">
                   <div className="main-product-slide">
-                    <div className="pro-slide-img">
-                      <img src={imgurl} alt="image" />
-                    </div>
+                    <MagnifierContainer className="position-relative">
+                      <div className="example-class">
+                        <MagnifierPreview imageSrc={imgurl} />
+                      </div>
+                      <MagnifierZoom
+                        className="xzoom position-absolute"
+                        style={{ height: "200px", width: "200px" }}
+                        imageSrc={imgurl}
+                      />
+                    </MagnifierContainer>
                   </div>
                 </div>
               </div>
