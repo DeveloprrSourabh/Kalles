@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-// Connect to Mongodb Compass
-
-const connectToMongo = () =>
+const connectToMongo = () => {
   mongoose
-    .connect("mongodb://localhost:27017/kalles")
-    .then(console.log("Connect Successfully"))
+    .connect(process.env.MONGO_URL)
+    .then(console.log("Connected to Successfully"))
     .catch((error) => {
       console.log(error);
     });
+};
 
 module.exports = connectToMongo;
