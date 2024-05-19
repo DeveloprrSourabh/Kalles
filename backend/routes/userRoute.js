@@ -4,6 +4,7 @@ const {
   userLoginController,
   userForgotPasswordController,
   userUpdateController,
+  getUserController,
 } = require("../controllers/userController");
 const { requireSignIn, isAdmin } = require("../middlewares/authmiddleware");
 const formidable = require("express-formidable");
@@ -21,6 +22,8 @@ router.post("/forgot-password", userForgotPasswordController);
 
 // Update PROFILE || METHOD PUT
 router.put("/update-user", formidable(), requireSignIn, userUpdateController);
+
+router.post("/getuser", requireSignIn, getUserController);
 
 // ADMIN AUTH || METHOD GET
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {

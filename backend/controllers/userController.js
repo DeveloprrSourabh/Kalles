@@ -235,3 +235,25 @@ exports.userUpdateController = async (req, res) => {
     });
   }
 };
+
+// Get User
+exports.getUserController = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    return res.status(200).send({
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        answer: user.answer,
+        address: user.address,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting User",
+    });
+  }
+};

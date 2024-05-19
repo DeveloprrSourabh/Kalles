@@ -1,9 +1,12 @@
 import { getByDisplayValue } from "@testing-library/react";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 const Header = () => {
+  const [auth, setAuth] = useAuth();
+
   let announceRef = useRef(true);
   return (
     <>
@@ -117,9 +120,41 @@ const Header = () => {
                 </Link>
               </div>
               <div className="icon-link">
-                <Link>
-                  <img src="./images/profile.svg" alt="" />
-                </Link>
+                {auth?.user ? (
+                  <div class="language">
+                    <div class="dropdown">
+                      <button
+                        class="dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        {auth.user.name}
+                      </button>
+                      <ul class="dropdown-menu py-2">
+                        <li>
+                          <Link class="dropdown-item" to="/dashboard/admin">
+                            Dashboard
+                          </Link>
+                        </li>
+                        <li>
+                          <Link class="dropdown-item" href="/shop">
+                            Another action
+                          </Link>
+                        </li>
+                        <li>
+                          <Link class="dropdown-item" href="/shop">
+                            Something else here
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                ) : (
+                  <Link>
+                    <img src="./images/profile.svg" alt="" />
+                  </Link>
+                )}
               </div>
               <div className="icon-link">
                 <Link>

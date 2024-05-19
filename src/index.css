@@ -111,7 +111,7 @@ ul.main-menu {
   box-shadow: 0px 0px 3px 0px #00000045;
 }
 .dropdown-menu a {
-  padding: 7px 10px;
+  padding: 7px 10px !important;
 }
 li.menu-list a {
   padding: 5px 17.5px;
@@ -960,6 +960,72 @@ span.ans {
   margin: 0px 20px;
   box-shadow: 0px 0px 3px 0px #0000003d;
 }
+
+/* Product Add Page */
+.item-add-form input,
+.item-add-form textarea {
+  width: 100%;
+  border: 1px solid #0000006b;
+  transition: all 0.5s;
+  padding: 10px;
+}
+.item-add-form .dropdown-toggle {
+  align-items: baseline;
+  width: 100%;
+  border: 1px solid #0000006b;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.item-add-form .dropdown-menu {
+  width: 100%;
+}
+.item-add-form .dropdown-item label {
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+.item-add-form .dropdown-item {
+  padding: 10px;
+}
+.item-add-form input[type="checkbox"] {
+  width: fit-content;
+}
+.item-add-form input:focus-visible,
+.item-add-form textarea:focus-visible {
+  outline: 1px solid #000;
+  transition: all 0.5s;
+}
+.item-add-form .col-sm-6 {
+  padding: 10px;
+}
+.select-item-photo img {
+  width: 100%;
+}
+.select-item-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  overflow: hidden;
+}
+.item-img-name {
+  text-align: center;
+  margin: 10px 0px;
+  padding: 5px;
+  border: 2px solid #000;
+  color: #000;
+  text-transform: capitalize;
+  border-radius: 34px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.item-img-name:hover {
+  background-color: #56cfe1;
+  color: #fff;
+  border-color: #fff;
+}
+
 /* Mobile Responsive */
 @media only screen and (max-width: 377px) {
   .announce a {
