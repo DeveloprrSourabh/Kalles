@@ -21,18 +21,20 @@ const tagSlice = createSlice({
 
 export default tagSlice.reducer;
 
-export const addTag = createAsyncThunk("tag/add", async (name, slug) => {
+export const addTag = createAsyncThunk("tag/add", async (name) => {
   const res = await fetch(`${host}/api/v1/tag/add-tag`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
     },
+    body: JSON.stringify(name),
   });
   const data = await res.json();
-  if (data?.success) {
-    toast.success(data?.message);
+
+  if (data.success) {
+    toast.success(data.message);
   } else {
-    toast.error(data?.message);
+    toast.error(data.message);
   }
 
   return data;

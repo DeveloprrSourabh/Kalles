@@ -24,6 +24,8 @@ const CreateCategory = () => {
     categoryData.append("name", category.name);
     photo && categoryData.append("photo", photo);
     await dispatch(addCategory(categoryData));
+    setCategory({ name: "" });
+    setPhoto("");
   };
   return (
     <>

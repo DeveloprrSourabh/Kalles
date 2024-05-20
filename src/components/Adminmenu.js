@@ -1,9 +1,11 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const Adminmenu = () => {
   return (
     <>
+      <Toaster />
       <ul
         class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
