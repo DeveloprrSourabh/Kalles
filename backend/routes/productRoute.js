@@ -19,7 +19,7 @@ router.post("/add-product", formidable(), addproductController);
 router.put("/update-product/:slug", formidable(), updateproductController);
 
 // Get All Products
-router.get("/get-products", getAllProductController);
+router.get("/all-products", getAllProductController);
 
 // DELETE PRODUCT
 router.delete("/delete-product/:id", deleteProductController);

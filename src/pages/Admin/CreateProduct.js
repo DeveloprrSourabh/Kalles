@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../Slices/productSlice";
-import { useEffect } from "react";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
+  
 
   //   Input Values
   const [product, setProduct] = useState({
@@ -16,35 +16,55 @@ const CreateProduct = () => {
     detail: "",
     price: "",
     quantity: "",
-    category: [],
-    tag: [],
-    size: [],
-    color: [],
     sku: "",
   });
   const [photo, setPhoto] = useState("");
 
-  const onCheck = () => {
-    // Category Added in Array
-    const checkboxes = document.querySelectorAll(
-      'input[name="category"]:checked'
-    );
+  const [category, setCategory] = useState([]);
+  const [tag, setTag] = useState([]);
+  const [size, setSize] = useState([]);
+  const [color, setColor] = useState([]);
 
-    // Loop through each checked checkbox and add its value to the array
-    checkboxes.forEach((checkbox) => {
-      if (!product.category.includes(checkbox.value)) {
-        product.category.push(checkbox.value);
-      }else{
-        
-      }
-      let uniqueArray = product.category.reduce((accumulator, item) => {
-        if (!accumulator.includes(item)) {
-          accumulator.push(item);
-        }
-        return accumulator;
-        product.category = uniqueArray;
-      }, []);
-    });
+  // Category Function
+  const onCheck = (event) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setCategory([...category, value]);
+      console.log(category);
+    } else {
+      setCategory(category.filter((cate) => cate !== value));
+    }
+  };
+  // Tag Function
+  const onCheckTag = (event) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setTag([...tag, value]);
+    } else {
+      setTag(tag.filter((tag) => tag !== value));
+    }
+  };
+  // Color Function
+  const onCheckColor = (event) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setColor([...color, value]);
+    } else {
+      setColor(color.filter((clr) => clr !== value));
+    }
+  };
+  // Size Function
+  const onCheckSize = (event) => {
+    const { value, checked } = event.target;
+
+    if (checked) {
+      setSize([...size, value]);
+    } else {
+      setSize(size.filter((sz) => sz !== value));
+    }
   };
 
   // Log the array to the console (or use it as needed)
@@ -63,11 +83,11 @@ const CreateProduct = () => {
     productData.append("quantity", product.quantity);
     productData.append("price", product.price);
     productData.append("category", product.category);
-    productData.append("tag", product.tag);
+    productData.append("tag", tag);
     productData.append("detail", product.detail);
-    productData.append("category", product.category);
-    productData.append("size", product.size);
-    productData.append("color", product.color);
+    productData.append("category", category);
+    productData.append("size", size);
+    productData.append("color", color);
     productData.append("sku", product.sku);
     photo && productData.append("photo", photo);
     await dispatch(addProduct(productData));
@@ -75,7 +95,7 @@ const CreateProduct = () => {
 
   return (
     <>
-      <div id="admin-dashboard">
+      <div id="admin-product">
         <div className="admin-profile">
           <div className="admin-row m-0 row">
             <div className="col-lg-3 p-0">
@@ -161,6 +181,7 @@ const CreateProduct = () => {
                                 <label>
                                   <input
                                     type="checkbox"
+                                    checked={category.includes("category1")}
                                     onChange={onCheck}
                                     name="category"
                                     value="category1"
@@ -174,6 +195,7 @@ const CreateProduct = () => {
                                 <label>
                                   <input
                                     type="checkbox"
+                                    checked={category.includes("category2")}
                                     onChange={onCheck}
                                     name="category"
                                     value="category2"
@@ -204,7 +226,8 @@ const CreateProduct = () => {
                                 <label>
                                   <input
                                     type="checkbox"
-                                    onChange={onChange}
+                                    checked={tag.includes("tag1")}
+                                    onChange={onCheckTag}
                                     name="tag"
                                     value="tag1"
                                   />{" "}
@@ -216,7 +239,8 @@ const CreateProduct = () => {
                               <div class="dropdown-item">
                                 <label>
                                   <input
-                                    onChange={onChange}
+                                    checked={tag.includes("tag2")}
+                                    onChange={onCheckTag}
                                     type="checkbox"
                                     name="tag"
                                     value="tag2"
@@ -246,7 +270,8 @@ const CreateProduct = () => {
                               <div class="dropdown-item">
                                 <label>
                                   <input
-                                    onChange={onChange}
+                                    checked={size.includes("M")}
+                                    onChange={onCheckSize}
                                     type="checkbox"
                                     name="size"
                                     value="M"
@@ -259,7 +284,8 @@ const CreateProduct = () => {
                               <div class="dropdown-item">
                                 <label>
                                   <input
-                                    onChange={onChange}
+                                    checked={size.includes("L")}
+                                    onChange={onCheckSize}
                                     type="checkbox"
                                     name="size"
                                     value="L"
@@ -289,7 +315,8 @@ const CreateProduct = () => {
                               <div class="dropdown-item">
                                 <label>
                                   <input
-                                    onChange={onChange}
+                                    checked={color.includes("Red")}
+                                    onChange={onCheckColor}
                                     type="checkbox"
                                     name="color"
                                     value="Red"
@@ -302,7 +329,8 @@ const CreateProduct = () => {
                               <div class="dropdown-item">
                                 <label>
                                   <input
-                                    onChange={onChange}
+                                    checked={color.includes("Green")}
+                                    onChange={onCheckColor}
                                     type="checkbox"
                                     name="color"
                                     value="Green"

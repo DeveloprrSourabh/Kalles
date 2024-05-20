@@ -12,7 +12,7 @@ const userSlice = createSlice({
     user: {},
   },
 
-  extraReducers: (builder) => {
+  extraReducers: (builder) => { 
     builder.addCase(login.fulfilled, (state, action) => {
       localStorage.setItem("auth", JSON.stringify(action.payload));
     });

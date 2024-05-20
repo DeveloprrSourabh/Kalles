@@ -103,7 +103,7 @@ exports.addproductController = async (req, res) => {
     await product.save();
     return res
       .status(200)
-      .send({ success: true, message: "Product Added Successfully" });
+      .send({ success: true, message: "Product Added Successfully", product });
   } catch (error) {
     console.log(error);
     return res.status(400).send({
@@ -219,7 +219,7 @@ exports.updateproductController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Product Updated Successfully",
-      // product,
+      product,
     });
   } catch (error) {
     console.log(error);
@@ -239,7 +239,7 @@ exports.getAllProductController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Getting All Products",
-      // products,
+      products,
     });
   } catch (error) {
     console.log(error);
@@ -266,7 +266,7 @@ exports.deleteProductController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Product Deleted Successfully",
-      // product,
+      product,
     });
   } catch (error) {
     console.log(error);
@@ -292,7 +292,7 @@ exports.getSingleProductController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Getting Single Product",
-      // product,
+      product,
     });
   } catch (error) {
     console.log(error);
