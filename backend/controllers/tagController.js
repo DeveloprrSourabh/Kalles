@@ -30,7 +30,7 @@ exports.addTagController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Tag Added Successfully",
-      // category,
+      tag,
     });
   } catch (error) {
     console.log(error);
@@ -69,7 +69,7 @@ exports.updateTagController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Tag Updated Successfully",
-      // category,
+      tag,
     });
   } catch (error) {
     console.log(error);
@@ -96,7 +96,7 @@ exports.deleteTagController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Tag Deleted Successfully",
-      // tag,
+      tag,
     });
   } catch (error) {
     console.log(error);
@@ -115,7 +115,7 @@ exports.getAllTagController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Get all Tags Successfully",
-      // tags,
+      tags,
     });
   } catch (error) {
     console.log(error);
@@ -140,7 +140,7 @@ exports.getSingleTagController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Getting Single Tag",
-      // tag,
+      tag,
     });
   } catch (error) {
     console.log(error);

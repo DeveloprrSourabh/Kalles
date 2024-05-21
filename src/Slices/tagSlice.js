@@ -50,5 +50,5 @@ export const getAllTags = createAsyncThunk("get/tags", async () => {
   });
   const tags = await res.json();
   console.log(tags);
-  return tags.tag;
+  return tags.tags;
 });

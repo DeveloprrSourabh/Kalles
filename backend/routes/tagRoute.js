@@ -19,7 +19,7 @@ router.put("/update-tag/:id", updateTagController);
 router.delete("/delete-tag/:id", deleteTagController);
 
 // GET ALL tag || METHOD GET
-router.get("/get-tags", getAllTagController);
+router.get("/all-tags", getAllTagController);
 
 // GET SINGLE tag || METHOD GET
 router.get("/get-tag/:id", getSingleTagController);

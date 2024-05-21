@@ -45,7 +45,7 @@ export const addCategory = createAsyncThunk(
 
 // Getting All Categories
 export const getAllCategories = createAsyncThunk("get/categories", async () => {
-  const res = await fetch(`${host}/api/v1/category/all-category`, {
+  const res = await fetch(`${host}/api/v1/category/all-categories`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -53,5 +53,5 @@ export const getAllCategories = createAsyncThunk("get/categories", async () => {
   });
   const categories = await res.json();
   console.log(categories);
-  return categories.category;
+  return categories.categories;
 });
