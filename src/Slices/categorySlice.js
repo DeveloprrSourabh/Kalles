@@ -9,6 +9,8 @@ const categorySlice = createSlice({
   initialState: {
     allCategories: [],
     singleCategories: {},
+    status: "idle",
+    error: null,
   },
 
   extraReducers: (builder) => {
@@ -16,11 +18,21 @@ const categorySlice = createSlice({
     builder.addCase(getAllCategories.fulfilled, (state, action) => {
       state.allCategories = action.payload;
     });
+    builder
+      .addCase(updateCategory.fulfilled, (state, action) => {})
+      .addCase(updateCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateCategory.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 
 export default categorySlice.reducer;
 
+// Add Category
 export const addCategory = createAsyncThunk(
   "category/add",
   async (categoryData) => {
@@ -33,6 +45,31 @@ export const addCategory = createAsyncThunk(
         },
       }
     );
+    if (data?.success) {
+      toast.success(data?.message);
+    } else {
+      toast.error(data?.message);
+    }
+
+    return data;
+  }
+);
+
+// Update Category
+export const updateCategory = createAsyncThunk(
+  "category/update",
+  async (categoryData) => {
+    console.log("Received categoryData:", categoryData); // Debugging statement
+    const { data } = await axios.put(
+      `${host}/api/v1/category/update-category/${categoryData?.catId}`,
+      categoryData,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth").token,
+        },
+      }
+    );
+    console.log(data);
     if (data?.success) {
       toast.success(data?.message);
     } else {

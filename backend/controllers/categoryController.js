@@ -54,7 +54,7 @@ exports.updateCategoryController = async (req, res) => {
     if (!name) {
       return res.status(400).send({ message: "category is Required" });
     }
-    let category = await Category.findOne({ name });
+    let category = await Category.findById(id);
     if (!category) {
       return res.status(404).send({
         success: false,
@@ -77,7 +77,7 @@ exports.updateCategoryController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Category Updated Successfully",
-      // category,
+      category,
     });
   } catch (error) {
     console.log(error);

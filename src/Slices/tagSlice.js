@@ -16,11 +16,13 @@ const tagSlice = createSlice({
     builder.addCase(getAllTags.fulfilled, (state, action) => {
       state.allTags = action.payload;
     });
+    builder.addCase(updateTag.fulfilled, (state, action) => {});
   },
 });
 
 export default tagSlice.reducer;
 
+// Add Tag
 export const addTag = createAsyncThunk("tag/add", async (name) => {
   const res = await fetch(`${host}/api/v1/tag/add-tag`, {
     method: "POST",
@@ -29,8 +31,29 @@ export const addTag = createAsyncThunk("tag/add", async (name) => {
     },
     body: JSON.stringify(name),
   });
+  console.log(name);
   const data = await res.json();
 
+  if (data.success) {
+    toast.success(data.message);
+  } else {
+    toast.error(data.message);
+  }
+
+  return data;
+});
+
+// Update Tag
+export const updateTag = createAsyncThunk("tag/update", async (name) => {
+  const res = await fetch(`${host}/api/v1/tag/update-tag/${name.tagId}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(name),
+  });
+  const data = await res.json();
+  console.log(name.tag.tag.name);
   if (data.success) {
     toast.success(data.message);
   } else {

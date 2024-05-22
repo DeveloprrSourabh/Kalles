@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/add-category", formidable(), addcategoryController);
 
 // UPDATE CATEGORY || METHOD PUT
-router.put("/update-category/:slug", formidable(), updateCategoryController);
+router.put("/update-category/:id", formidable(), updateCategoryController);
 
 // DELETE CATEGORY || METHOD DELETE
 router.delete("/delete-category/:id", deleteCategoryController);

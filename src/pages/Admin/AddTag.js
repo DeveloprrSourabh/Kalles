@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { useDispatch, useSelector } from "react-redux";
-import { addTag, getAllTags } from "../../Slices/tagSlice";
+import { addTag, getAllTags, updateTag } from "../../Slices/tagSlice";
 import { Link } from "react-router-dom";
 
 const AddTag = () => {
   const dispatch = useDispatch();
-
+  let setfRef = useRef(true);
+  let setsRef = useRef(true);
   // Getting All Tags
   useEffect(() => {
     dispatch(getAllTags());
@@ -17,18 +18,30 @@ const AddTag = () => {
   //   Input Values
   const [tag, setTag] = useState({
     name: "",
+    tagId: "",
   });
+  // const [id, setId] = useState("");
 
   //   Input OnChange Value
   const onChange = (e) => {
     setTag({ ...tag, [e.target.name]: e.target.value });
   };
 
-  //   Login Function
+  //   Add Function
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(addTag(tag));
     setTag({ name: "" });
+    dispatch(getAllTags());
+  };
+  // Update Tag
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    await dispatch(updateTag(tag));
+    setTag({ name: "" });
+    dispatch(getAllTags());
+    setfRef.current.classList.remove("d-none");
+    setsRef.current.classList.add("d-none");
   };
   return (
     <>
@@ -39,7 +52,7 @@ const AddTag = () => {
               <Adminmenu />
             </div>
             <div className="col-lg-4">
-              <div className="item-add-form py-5 pe-5">
+              <div ref={setfRef} className="item-add-form py-5 pe-5">
                 <form action="" method="POST">
                   <div className="row flex-column my-3">
                     <div className="col-sm-12">
@@ -61,6 +74,28 @@ const AddTag = () => {
                   </div>
                 </form>
               </div>
+              <div ref={setsRef} className="d-none item-add-form py-5 pe-5">
+                <form action="" method="POST">
+                  <div className="row flex-column my-3">
+                    <div className="col-sm-12">
+                      <input
+                        type="text"
+                        name="name"
+                        onChange={onChange}
+                        value={tag.name}
+                        placeholder="Enter Tag Name..."
+                      />
+                    </div>
+
+                    <div className="col-sm-12 my-3">
+                      {" "}
+                      <div class="add-cart-btn effect" onClick={handleUpdate}>
+                        Update Tag
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
             <div className="col-lg-4">
               <div className="tag-list my-5 ms-4">
@@ -72,7 +107,16 @@ const AddTag = () => {
                           <b>{e.name}</b>
                         </span>
                         <span className="tag-oper d-flex gap-4">
-                          <div className="edit-tag">
+                          <div
+                            onClick={() => {
+                              setfRef.current.classList.add("d-none");
+                              setsRef.current.classList.remove("d-none");
+                              setTag({ name: e.name, tagId: e._id });
+                              // setId(e._id);
+                              // console.log(e._id);
+                            }}
+                            className="edit-tag"
+                          >
                             <Link to={""}>
                               <i class="fa-solid fa-pen-to-square"></i>
                             </Link>
@@ -84,22 +128,6 @@ const AddTag = () => {
                       </li>
                     );
                   })}
-
-                  <li className="py-4 px-4  d-flex justify-content-between">
-                    <span className="tag-name text-black">
-                      <b>Man</b>
-                    </span>
-                    <span className="tag-oper d-flex gap-4">
-                      <div className="edit-tag">
-                        <Link to={""}>
-                          <i class="fa-solid fa-pen-to-square"></i>
-                        </Link>
-                      </div>
-                      <div className="delete-tag">
-                        <i class="fa-duotone fa-trash"></i>
-                      </div>
-                    </span>
-                  </li>
                 </ul>
               </div>
             </div>
