@@ -45,24 +45,31 @@ const CreateCategory = () => {
     e.preventDefault();
     const categoryData = new FormData();
     categoryData.append("name", category.name);
+    categoryData.append("catId", category.catId);
     photo && categoryData.append("photo", photo);
     await dispatch(addCategory(categoryData));
     setCategory({ name: "" });
     setPhoto("");
     dispatch(getAllCategories());
   };
+  // Get Photo
+  const getPhoto = (e) => {
+    return `${host}/api/v1/category/category-photo/${e}`;
+  };
   //   Update Function
   const handleUpdate = async (e) => {
     e.preventDefault();
-    let categoryData = new FormData();
+    const categoryData = new FormData();
     categoryData.append("name", category.name);
     categoryData.append("catId", category.catId);
     photo && categoryData.append("photo", photo);
-    dispatch(updateCategory(categoryData));
+    await dispatch(updateCategory({ categoryData, catId: category.catId }));
+    getPhoto(category.catId);
     setCategory({ name: "", photo: "" });
     setPhoto("");
     dispatch(getAllCategories());
   };
+
   return (
     <>
       <div id="admin-category-dashboard">
@@ -173,7 +180,7 @@ const CreateCategory = () => {
                         >
                           <div className="cate-photo-show">
                             <img
-                              src={`${host}/api/v1/category/category-photo/${e?._id}`}
+                              src={getPhoto(e._id)}
                               width={"50px"}
                               height={"50px"}
                               alt=""

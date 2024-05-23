@@ -8,8 +8,8 @@ const tagRoute = require("./routes/tagRoute");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 // configure the app to use bodyParser()
 app.use(
   bodyParser.urlencoded({

@@ -58,25 +58,29 @@ export const addCategory = createAsyncThunk(
 // Update Category
 export const updateCategory = createAsyncThunk(
   "category/update",
-  async (categoryData) => {
-    console.log("Received categoryData:", categoryData); // Debugging statement
-    const { data } = await axios.put(
-      `${host}/api/v1/category/update-category/${categoryData?.catId}`,
-      categoryData,
-      {
-        headers: {
-          Authorization: localStorage.getItem("auth").token,
-        },
+  async (categoryData, { rejectWithValue }) => {
+    try {
+      console.log("Received categoryData:", categoryData); // Debugging statement
+      const { data } = await axios.put(
+        `${host}/api/v1/category/update-category/${categoryData.catId}`,
+        categoryData.categoryData,
+        {
+          headers: {
+            Authorization: localStorage.getItem("auth").token,
+          },
+        }
+      );
+      console.log(data);
+      if (data?.success) {
+        toast.success(data?.message);
+      } else {
+        toast.error(data?.message);
       }
-    );
-    console.log(data);
-    if (data?.success) {
-      toast.success(data?.message);
-    } else {
-      toast.error(data?.message);
+      return data;
+    } catch (error) {
+      console.error("Error updating category:", error);
+      return rejectWithValue(error.response.data);
     }
-
-    return data;
   }
 );
 
