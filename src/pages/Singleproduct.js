@@ -13,8 +13,17 @@ import {
   MagnifierPreview,
   MagnifierZoom,
 } from "react-image-magnifiers";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProduct } from "../Slices/productSlice";
 
 const Singleproduct = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSingleProduct());
+  }, []);
+  const product = useSelector((state) => state.product.singleProduct);
+  console.log(product);
+
   const [imgurl, setImgurl] = useState("/images/prod11.webp");
   $(".tabs").click(function () {
     var contClass = $(this).data("div");

@@ -1123,6 +1123,18 @@ span.ans {
 .fa-duotone {
   font-family: fontAwesome;
 }
+
+/* No Data  */
+.no-data {
+  height: 100vh;
+}
+.no-data h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 20px #80808057;
+  padding: 20px;
+  border-radius: 20px;
+}
 /* Mobile Responsive */
 @media only screen and (max-width: 377px) {
   .announce a {

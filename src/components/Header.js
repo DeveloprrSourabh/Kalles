@@ -18,7 +18,7 @@ const Header = () => {
         >
           <Link className="mx-auto text-light text-text-decoration-none" to="#">
             Today deal sale off <b>70%</b>. End in . Hurry Up
-            <img src="./images/arrow.svg" alt="" />
+            <img src="../images/arrow.svg" alt="" />
           </Link>
           <div
             onClick={() => {
@@ -34,11 +34,11 @@ const Header = () => {
           <div className="top_wrap d-flex justify-content-between align-content-center flex-column  flex-sm-row">
             <div className="contact-top d-none d-sm-block">
               <Link to="tel:+01 23456789">
-                <img className="mx-2" src="./images/phone.svg" alt="" />
+                <img className="mx-2" src="../images/phone.svg" alt="" />
                 +01 23456789
               </Link>
               <Link to="mailto:Kalles@domain.com">
-                <img className="mx-2" src="./images/email.svg" alt="" />
+                <img className="mx-2" src="../images/email.svg" alt="" />
                 Kalles@domain.com
               </Link>
             </div>
@@ -50,7 +50,7 @@ const Header = () => {
             </div>
             <div className="top-wrap_option d-flex gap-4">
               <div className="location">
-                <img src="./images/location.svg" alt="" />
+                <img src="../images/location.svg" alt="" />
                 <Link>Location</Link>
               </div>
               <div className="language">
@@ -89,7 +89,7 @@ const Header = () => {
         <div className="main-header">
           <div className="last-header d-flex justify-content-between">
             <div className="logo">
-              <img src="./images/logo.avif" alt="main-logo" />
+              <img src="../images/logo.avif" alt="main-logo" />
             </div>
             <div className="header-list">
               <ul className="main-menu d-flex flex-sm-row flex-column align-items-sm-center  align-items-start hover">
@@ -116,7 +116,7 @@ const Header = () => {
             <div className="header-icons">
               <div className="icon-link">
                 <Link>
-                  <img src="./images/search.svg" alt="" />
+                  <img src="../images/search.svg" alt="" />
                 </Link>
               </div>
               <div className="icon-link">
@@ -152,18 +152,18 @@ const Header = () => {
                   </div>
                 ) : (
                   <Link>
-                    <img src="./images/profile.svg" alt="" />
+                    <img src="../images/profile.svg" alt="" />
                   </Link>
                 )}
               </div>
               <div className="icon-link">
                 <Link>
-                  <img src="./images/wish.svg" alt="" />
+                  <img src="../images/wish.svg" alt="" />
                 </Link>
               </div>
               <div className="icon-link">
                 <Link>
-                  <img src="./images/cart.svg" alt="" />
+                  <img src="../images/cart.svg" alt="" />
                 </Link>
               </div>
             </div>

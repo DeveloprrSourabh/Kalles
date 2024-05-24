@@ -34,7 +34,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blogpage />} />
-        <Route path="/shop/:id" element={<Singleproduct />} />
+        <Route path="/shop/:slug" element={<Singleproduct />} />
         <Route path="/blog/:id" element={<Singleblog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

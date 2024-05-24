@@ -64,7 +64,6 @@ const CreateCategory = () => {
     categoryData.append("catId", category.catId);
     photo && categoryData.append("photo", photo);
     await dispatch(updateCategory({ categoryData, catId: category.catId }));
-    getPhoto(category.catId);
     setCategory({ name: "", photo: "" });
     setPhoto("");
     dispatch(getAllCategories());
