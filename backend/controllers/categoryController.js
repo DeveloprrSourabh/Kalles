@@ -119,7 +119,7 @@ exports.deleteCategoryController = async (req, res) => {
 // Get All Category Controller
 exports.getAllCategoryController = async (req, res) => {
   try {
-    const categories = await Category.find({});
+    const categories = await Category.find({}).select("-photo");
     return res.status(200).send({
       success: true,
       message: "Get all Category Successfully",
@@ -138,7 +138,7 @@ exports.getAllCategoryController = async (req, res) => {
 // Get Single Category
 exports.getSingleCategoryController = async (req, res) => {
   try {
-    const category = await Category.findById(req.params.id);
+    const category = await Category.findById(req.params.id).select("-photo");
     if (!category) {
       return res.status(400).send({
         success: false,

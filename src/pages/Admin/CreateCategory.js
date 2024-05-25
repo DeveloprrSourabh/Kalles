@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import {
   addCategory,
+  deleteCategory,
   getAllCategories,
   updateCategory,
 } from "../../Slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getSingleProduct } from "../../Slices/productSlice";
 
 const CreateCategory = () => {
   const host = "http://localhost:8000";
@@ -18,13 +20,11 @@ const CreateCategory = () => {
   // Getting All Categories
   useEffect(() => {
     dispatch(getAllCategories());
+    dispatch(getSingleProduct());
   }, []);
   const allcate = useSelector((state) => state.category.allCategories);
-  // const status = useSelector((state) => state.category.status);
-  // const error = useSelector((state) => state.category.error);
-  // console.log(status);
-  // console.log(error);
-  console.log(allcate);
+  const all = useSelector((state) => state.product.singleProduct);
+  console.log(all);
 
   //   Input Values
   const [category, setCategory] = useState({
@@ -69,6 +69,11 @@ const CreateCategory = () => {
     dispatch(getAllCategories());
   };
 
+  // Delete Category
+  const delCate = (e) => {
+    dispatch(deleteCategory(e));
+    dispatch(getAllCategories());
+  };
   return (
     <>
       <div id="admin-category-dashboard">
@@ -204,7 +209,12 @@ const CreateCategory = () => {
                                 <i class="fa-solid fa-pen-to-square"></i>
                               </Link>
                             </div>
-                            <div className="delete-tag">
+                            <div
+                              className="delete-tag"
+                              onClick={() => {
+                                delCate(e._id);
+                              }}
+                            >
                               <i class="fa-duotone fa-trash"></i>
                             </div>
                           </span>

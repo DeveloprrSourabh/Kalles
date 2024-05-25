@@ -248,6 +248,14 @@ li.menu-list a {
 }
 
 /* Product Section */
+.admin-row {
+  height: 100vh;
+  overflow-y: hidden;
+}
+.admin-row .col-lg-9 {
+  height: 100vh;
+  overflow-y: auto;
+}
 .main-heading {
   width: fit-content;
 }
@@ -1055,7 +1063,7 @@ span.ans {
 
 .tag-list ul {
   list-style: none;
-  height: 495px;
+  max-height: 495px;
   overflow-y: auto;
   overflow-x: hidden;
 }

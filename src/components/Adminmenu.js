@@ -95,10 +95,6 @@ const Adminmenu = () => {
               <Link class="collapse-item" to="../admin/add-category">
                 Add Category
               </Link>
-
-              <Link class="collapse-item" href="../admin/all-category">
-                All Category
-              </Link>
             </div>
           </div>
         </li>
@@ -125,9 +121,6 @@ const Adminmenu = () => {
               <h6 class="collapse-header">Tag</h6>
               <Link class="collapse-item" to="../admin/add-tag">
                 Add Tag
-              </Link>
-              <Link class="collapse-item" to="../admin/all-tags">
-                All Tag
               </Link>
             </div>
           </div>

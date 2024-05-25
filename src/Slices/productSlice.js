@@ -63,14 +63,14 @@ export const getAllProducts = createAsyncThunk("get/products", async () => {
 export const getSingleProduct = createAsyncThunk(
   "get/singleproduct",
   async (slug) => {
-    const res = await fetch(`${host}/api/v1/product/get-product/${slug}`, {
+    const res = await fetch(`${host}/api/v1/product/get-product/hema`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
       },
     });
     const product = await res.json();
-
+    console.log(product);
     return product.product;
   }
 );

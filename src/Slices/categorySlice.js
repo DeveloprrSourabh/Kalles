@@ -14,10 +14,13 @@ const categorySlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(addCategory.fulfilled, (state, action) => {});
+    builder.addCase(addCategory.fulfilled, (state, action) => {
+      state.allCategories = action.payload;
+    });
     builder.addCase(getAllCategories.fulfilled, (state, action) => {
       state.allCategories = action.payload;
     });
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {});
     builder
       .addCase(updateCategory.fulfilled, (state, action) => {})
       .addCase(updateCategory.pending, (state) => {
@@ -93,6 +96,23 @@ export const getAllCategories = createAsyncThunk("get/categories", async () => {
     },
   });
   const categories = await res.json();
-  console.log(categories);
   return categories.categories;
 });
+//  Delete Category
+export const deleteCategory = createAsyncThunk(
+  "delete/category",
+  async (id) => {
+    const res = await fetch(`${host}/api/v1/category/delete-category/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (data?.success) {
+      toast.success(data?.message);
+    } else {
+      toast.error(data?.message);
+    }
+  }
+);

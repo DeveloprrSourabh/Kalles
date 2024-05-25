@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../Slices/productSlice";
+import { getAllCategories } from "../../Slices/categorySlice";
+import useCategory from "../../hooks/useCategory";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  
 
   //   Input Values
   const [product, setProduct] = useState({
@@ -26,15 +27,14 @@ const CreateProduct = () => {
   const [color, setColor] = useState([]);
 
   // Category Function
-  const onCheck = (event) => {
-    const { value, checked } = event.target;
-
-    if (checked) {
-      setCategory([...category, value]);
-      console.log(category);
-    } else {
-      setCategory(category.filter((cate) => cate !== value));
-    }
+  const onCheck = (id) => {
+    setCategory((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(id)) {
+        return prevSelectedCategories.filter((categoryId) => categoryId !== id);
+      } else {
+        return [...prevSelectedCategories, id];
+      }
+    });
   };
   // Tag Function
   const onCheckTag = (event) => {
@@ -82,7 +82,6 @@ const CreateProduct = () => {
     productData.append("description", product.description);
     productData.append("quantity", product.quantity);
     productData.append("price", product.price);
-    productData.append("category", product.category);
     productData.append("tag", tag);
     productData.append("detail", product.detail);
     productData.append("category", category);
@@ -92,7 +91,12 @@ const CreateProduct = () => {
     photo && productData.append("photo", photo);
     await dispatch(addProduct(productData));
   };
-
+  // Getting All Category
+  // Getting All Categories
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, []);
+  const allcate = useSelector((state) => state.category.allCategories);
   return (
     <>
       <div id="admin-product">
@@ -176,34 +180,24 @@ const CreateProduct = () => {
                             Category
                           </button>
                           <ul class="dropdown-menu py-2">
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    checked={category.includes("category1")}
-                                    onChange={onCheck}
-                                    name="category"
-                                    value="category1"
-                                  />{" "}
-                                  Category1
-                                </label>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    checked={category.includes("category2")}
-                                    onChange={onCheck}
-                                    name="category"
-                                    value="category2"
-                                  />{" "}
-                                  Category2
-                                </label>
-                              </div>
-                            </li>
+                            {allcate?.map((e) => {
+                              return (
+                                <li>
+                                  <div class="dropdown-item">
+                                    <label>
+                                      <input
+                                        type="checkbox"
+                                        checked={category.includes(e.name)}
+                                        onChange={onCheck}
+                                        name="category"
+                                        value={e._id}
+                                      />{" "}
+                                      {e.name}
+                                    </label>
+                                  </div>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       </div>
