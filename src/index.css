@@ -1093,28 +1093,16 @@ span.ans {
 .tag-list li:hover .tag-name {
   color: #fff !important;
 }
-.tag-list li:hover .fa-duotone {
-  color: #fff;
-}
-.tag-list li:hover .fa-solid {
-  color: #fff;
-}
-.edit-tag:hover .fa-solid {
-  color: green !important;
-}
-.delete-tag:hover .fa-duotone {
-  color: rgb(255, 20, 20) !important;
-}
-.edit-tag:hover {
-  background-color: #fff;
-}
+
 .edit-tag,
 .delete-tag {
+  background-color: #fff;
   transition: all 0.5s;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   overflow: hidden;
+  justify-content: center;
   display: flex;
 }
 .delete-tag:hover {

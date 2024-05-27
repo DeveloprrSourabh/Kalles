@@ -25,7 +25,6 @@ const CreateCategory = () => {
   }, []);
   const allcate = useSelector((state) => state.category.allCategories);
   const all = useSelector((state) => state.product.singleProduct);
-  console.log(allcate);
 
   //   Input Values
   const [category, setCategory] = useState({
@@ -68,6 +67,8 @@ const CreateCategory = () => {
     setCategory({ name: "", photo: "" });
     setPhoto("");
     dispatch(getAllCategories());
+    setfRef.current.classList.remove("d-none");
+    setsRef.current.classList.add("d-none");
   };
 
   // Delete Category
@@ -207,9 +208,13 @@ const CreateCategory = () => {
                                 }}
                                 className="edit-tag"
                               >
-                                <Link to={""}>
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                                </Link>
+                                {/* <Link to={""}> */}
+                                <img
+                                  width={20}
+                                  src="../../images/edit.svg"
+                                  alt=""
+                                />
+                                {/* </Link> */}
                               </div>
                               <div
                                 className="delete-tag"
@@ -217,7 +222,11 @@ const CreateCategory = () => {
                                   delCate(e._id);
                                 }}
                               >
-                                <i class="fa-duotone fa-trash"></i>
+                                <img
+                                  width={20}
+                                  src="../../images/delete.svg"
+                                  alt=""
+                                />
                               </div>
                             </span>
                           </li>

@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { useDispatch, useSelector } from "react-redux";
-import { addTag, getAllTags, updateTag } from "../../Slices/tagSlice";
+import {
+  addTag,
+  deleteTag,
+  getAllTags,
+  updateTag,
+} from "../../Slices/tagSlice";
 import { Link } from "react-router-dom";
 
 const AddTag = () => {
@@ -13,7 +18,6 @@ const AddTag = () => {
     dispatch(getAllTags());
   }, []);
   const alltag = useSelector((state) => state.tag.allTags);
-  console.log(alltag);
 
   //   Input Values
   const [tag, setTag] = useState({
@@ -42,6 +46,12 @@ const AddTag = () => {
     dispatch(getAllTags());
     setfRef.current.classList.remove("d-none");
     setsRef.current.classList.add("d-none");
+  };
+
+  // Delete Tag
+  const delCate = (e) => {
+    dispatch(deleteTag(e));
+    dispatch(getAllTags());
   };
   return (
     <>
@@ -100,34 +110,49 @@ const AddTag = () => {
             <div className="col-lg-4">
               <div className="tag-list my-5 ms-4">
                 <ul className="p-0 m-0">
-                  {alltag?.map((e) => {
-                    return (
-                      <li className="py-3 px-4 d-flex justify-content-between">
-                        <span className="tag-name text-black">
-                          <b>{e.name}</b>
-                        </span>
-                        <span className="tag-oper d-flex gap-4">
-                          <div
-                            onClick={() => {
-                              setfRef.current.classList.add("d-none");
-                              setsRef.current.classList.remove("d-none");
-                              setTag({ name: e.name, tagId: e._id });
-                              // setId(e._id);
-                              // console.log(e._id);
-                            }}
-                            className="edit-tag"
-                          >
-                            <Link to={""}>
-                              <i class="fa-solid fa-pen-to-square"></i>
-                            </Link>
-                          </div>
-                          <div className="delete-tag">
-                            <i class="fa-duotone fa-trash"></i>
-                          </div>
-                        </span>
-                      </li>
-                    );
-                  })}
+                  {alltag.length !== 0 ? (
+                    alltag?.map((e) => {
+                      return (
+                        <li className="py-3 px-4 d-flex justify-content-between">
+                          <span className="tag-name text-black">
+                            <b>{e.name}</b>
+                          </span>
+                          <span className="tag-oper d-flex gap-4">
+                            <div
+                              onClick={() => {
+                                setfRef.current.classList.add("d-none");
+                                setsRef.current.classList.remove("d-none");
+                                setTag({ name: e.name, tagId: e._id });
+                                // setId(e._id);
+                                // console.log(e._id);
+                              }}
+                              className="edit-tag"
+                            >
+                              <img
+                                width={20}
+                                src="../../images/edit.svg"
+                                alt=""
+                              />
+                            </div>
+                            <div
+                              className="delete-tag"
+                              onClick={() => {
+                                delCate(e._id);
+                              }}
+                            >
+                              <img
+                                width={20}
+                                src="../../images/delete.svg"
+                                alt=""
+                              />
+                            </div>
+                          </span>
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <h2 className="text-center p-3">There is No Tag</h2>
+                  )}
                 </ul>
               </div>
             </div>

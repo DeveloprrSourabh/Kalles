@@ -16,6 +16,11 @@ const tagSlice = createSlice({
     builder.addCase(getAllTags.fulfilled, (state, action) => {
       state.allTags = action.payload;
     });
+    builder.addCase(deleteTag.fulfilled, (state, action) => {
+      state.allTags = state.allTags.filter((e) => {
+        return e._id !== action.payload._id;
+      });
+    });
     builder.addCase(updateTag.fulfilled, (state, action) => {});
   },
 });
@@ -74,4 +79,21 @@ export const getAllTags = createAsyncThunk("get/tags", async () => {
   const tags = await res.json();
   console.log(tags);
   return tags.tags;
+});
+
+//  Delete Category
+export const deleteTag = createAsyncThunk("delete/tag", async (id) => {
+  const res = await fetch(`${host}/api/v1/tag/delete-tag/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  const data = await res.json();
+  return data.tag;
+  if (data?.success) {
+    toast.success(data?.message);
+  } else {
+    toast.error(data?.message);
+  }
 });
