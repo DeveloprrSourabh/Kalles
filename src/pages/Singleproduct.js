@@ -2,17 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
 import $ from "jquery";
-import {
-  Magnifier,
-  GlassMagnifier,
-  SideBySideMagnifier,
-  PictureInPictureMagnifier,
-  MOUSE_ACTIVATION,
-  TOUCH_ACTIVATION,
-  MagnifierContainer,
-  MagnifierPreview,
-  MagnifierZoom,
-} from "react-image-magnifiers";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../Slices/productSlice";
 
@@ -88,16 +78,7 @@ const Singleproduct = () => {
                 {/* Single big img */}
                 <div className="pro-slider-start">
                   <div className="main-product-slide">
-                    <MagnifierContainer className="position-relative">
-                      <div className="example-class">
-                        <MagnifierPreview imageSrc={imgurl} />
-                      </div>
-                      <MagnifierZoom
-                        className="xzoom position-absolute"
-                        style={{ height: "200px", width: "200px" }}
-                        imageSrc={imgurl}
-                      />
-                    </MagnifierContainer>
+                    <img src={imgurl} alt="" />
                   </div>
                 </div>
               </div>

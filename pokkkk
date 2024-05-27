@@ -1,0 +1,143 @@
+[33mcommit 05d2daa8eb56c3922aa6df96fc8d0349783654c6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sat May 25 21:10:38 2024 +0530
+
+    Add Product with category
+
+[33mcommit 221e310ff15390020f073e4c0bb4ce0966ad70b3[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Fri May 24 21:34:35 2024 +0530
+
+    Add Condition to check there is atleast one product or not
+
+[33mcommit 47b27397d8a73cfd35e7d8ca4fbfeeb12b5dc4bc[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Thu May 23 22:02:07 2024 +0530
+
+    Add API endpoint to Update Category Photo
+
+[33mcommit 2b5d15a800b1cd4ffb29d41794e54df2b150465b[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Wed May 22 22:09:41 2024 +0530
+
+    Add API endpoint to Update Tag
+
+[33mcommit 7b3e7bebca429edf0178522d78997cdea9bbc718[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Tue May 21 21:31:07 2024 +0530
+
+    Add All Category And tag
+
+[33mcommit 1319683f775b50e94719f5943e80f02e67e8bab0[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Mon May 20 22:38:10 2024 +0530
+
+    Add API endpoint to create new Tag
+
+[33mcommit 6a4afc727ef610d0f8d15cfd46c5b32c8c5f271c[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Mon May 20 21:30:18 2024 +0530
+
+    Add API endpoint to create new Category
+
+[33mcommit 7f39b74c82a87b6faa69270cc6c6fa2ed6e04d86[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sun May 19 15:30:04 2024 +0530
+
+    Add API endpoint to create new product
+
+[33mcommit 8efcc3b04c29e01996be6faf7187060ae6c2d873[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sat May 18 17:32:55 2024 +0530
+
+    User Auth Api Completed
+
+[33mcommit b3c82abf987a1bcb2f4cb92218899476148e3372[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sat May 18 10:09:14 2024 +0530
+
+    Product and category api finished
+
+[33mcommit a107465e8d1936e1f58c11e599e443f62e325611[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Fri May 17 19:01:42 2024 +0530
+
+    Frontend Part Completed
+
+[33mcommit d9f93f63be0983a664c2806c4abe4fbb486f9d92[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Wed May 15 21:07:34 2024 +0530
+
+    Shop Image change functionality added
+
+[33mcommit bf6ecbbe98a98e29c9a2468f3eeca71ecfd1cf40[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Tue May 14 20:40:07 2024 +0530
+
+    Shop Single Page Design Completed
+
+[33mcommit 739cc7ae7aa5efdb6d9f0ce75ddbd5281d820a67[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Mon May 13 21:46:59 2024 +0530
+
+    Contact and Blog page design completed
+
+[33mcommit e2540c3670019f4dbe07fea6ee334f3ada0871e5[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sun May 12 22:33:35 2024 +0530
+
+    change design of filter
+
+[33mcommit df8dae4df6ce32bb4771eba67881d2357ce876d1[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sun May 12 22:29:35 2024 +0530
+
+    Shop Page Filter Section completed
+
+[33mcommit 7df3ee8e6c4ad1c6122153596b64e23d31447cb1[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sat May 11 17:55:17 2024 +0530
+
+    About Page Design Completed
+
+[33mcommit ab507f0e05b3a468780c3d245afdb63b51cf215e[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Fri May 10 22:12:39 2024 +0530
+
+    Shop and Collections page design completed
+
+[33mcommit f6aa0ed38851dc51d576b664547cc566378296bf[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Thu May 9 21:00:20 2024 +0530
+
+    Header responsive start
+
+[33mcommit 1eb558ded98706b4497a558ecab6564501e16d68[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Wed May 8 21:10:39 2024 +0530
+
+    Home page design completed
+
+[33mcommit afeb3c6b26fa3aa97fc034ad931d78f4977cf290[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Tue May 7 21:36:52 2024 +0530
+
+    Home Page Complete Only footer pending
+
+[33mcommit 3f1ca8bb42711ce10bdff7a9bab853025330ab65[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Mon May 6 23:42:16 2024 +0530
+
+    Product Card Completed
+
+[33mcommit b0226980fef17443c1d39a319a65eb34647ddb73[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Mon May 6 17:33:22 2024 +0530
+
+    Category Section Completed
+
+[33mcommit 919c516428a75f8f03d8dcce53f8baf22dfb3fd7[m
+Author: Sourabh Sain <114208070+DeveloprrSourabh@users.noreply.github.com>
+Date:   Sun May 5 14:55:23 2024 +0530
+
+    Create Main Banner

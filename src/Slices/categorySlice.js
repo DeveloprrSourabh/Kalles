@@ -20,7 +20,11 @@ const categorySlice = createSlice({
     builder.addCase(getAllCategories.fulfilled, (state, action) => {
       state.allCategories = action.payload;
     });
-    builder.addCase(deleteCategory.fulfilled, (state, action) => {});
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      state.allCategories = state.allCategories.filter((e) => {
+        return e._id !== action.payload._id;
+      });
+    });
     builder
       .addCase(updateCategory.fulfilled, (state, action) => {})
       .addCase(updateCategory.pending, (state) => {
@@ -109,6 +113,7 @@ export const deleteCategory = createAsyncThunk(
       },
     });
     const data = await res.json();
+    return data.category;
     if (data?.success) {
       toast.success(data?.message);
     } else {

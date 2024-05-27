@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getSingleProduct } from "../../Slices/productSlice";
+import Nodata from "../../components/Nodata";
 
 const CreateCategory = () => {
   const host = "http://localhost:8000";
@@ -24,7 +25,7 @@ const CreateCategory = () => {
   }, []);
   const allcate = useSelector((state) => state.category.allCategories);
   const all = useSelector((state) => state.product.singleProduct);
-  console.log(all);
+  console.log(allcate);
 
   //   Input Values
   const [category, setCategory] = useState({
@@ -175,52 +176,59 @@ const CreateCategory = () => {
             <div className="col-lg-4">
               <div className="tag-list my-5 ms-4">
                 <ul className="p-0 m-0">
-                  {allcate &&
-                    allcate.map((e) => {
-                      return (
-                        <li
-                          key={e._id}
-                          className="py-3 px-4 d-flex justify-content-between"
-                        >
-                          <div className="cate-photo-show">
-                            <img
-                              src={getPhoto(e._id)}
-                              width={"50px"}
-                              height={"50px"}
-                              alt=""
-                            />
-                          </div>
-                          <span className="tag-name text-black">
-                            <b>{e.name}</b>
-                          </span>
-                          <span className="tag-oper d-flex gap-4">
-                            <div
-                              onClick={() => {
-                                setfRef.current.classList.add("d-none");
-                                setsRef.current.classList.remove("d-none");
-                                setCategory({ name: e.name, catId: e._id });
-                                setPhotourl(
-                                  `${host}/api/v1/category/category-photo/${e?._id}`
-                                );
-                              }}
-                              className="edit-tag"
-                            >
-                              <Link to={""}>
-                                <i class="fa-solid fa-pen-to-square"></i>
-                              </Link>
+                  {allcate.length !== 0 ? (
+                    Array.isArray(allcate) ? (
+                      allcate?.map((e) => {
+                        return (
+                          <li
+                            key={e._id}
+                            className="py-3 px-4 d-flex justify-content-between"
+                          >
+                            <div className="cate-photo-show">
+                              <img
+                                src={getPhoto(e._id)}
+                                width={"50px"}
+                                height={"50px"}
+                                alt=""
+                              />
                             </div>
-                            <div
-                              className="delete-tag"
-                              onClick={() => {
-                                delCate(e._id);
-                              }}
-                            >
-                              <i class="fa-duotone fa-trash"></i>
-                            </div>
-                          </span>
-                        </li>
-                      );
-                    })}{" "}
+                            <span className="tag-name text-black">
+                              <b>{e.name}</b>
+                            </span>
+                            <span className="tag-oper d-flex gap-4">
+                              <div
+                                onClick={() => {
+                                  setfRef.current.classList.add("d-none");
+                                  setsRef.current.classList.remove("d-none");
+                                  setCategory({ name: e.name, catId: e._id });
+                                  setPhotourl(
+                                    `${host}/api/v1/category/category-photo/${e?._id}`
+                                  );
+                                }}
+                                className="edit-tag"
+                              >
+                                <Link to={""}>
+                                  <i class="fa-solid fa-pen-to-square"></i>
+                                </Link>
+                              </div>
+                              <div
+                                className="delete-tag"
+                                onClick={() => {
+                                  delCate(e._id);
+                                }}
+                              >
+                                <i class="fa-duotone fa-trash"></i>
+                              </div>
+                            </span>
+                          </li>
+                        );
+                      })
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    <h2 className="text-center p-3">There is No Category</h2>
+                  )}
                 </ul>
               </div>
             </div>
