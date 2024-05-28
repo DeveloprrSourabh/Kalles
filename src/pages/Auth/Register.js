@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, register, updateUser } from "../../Slices/useSlice";
+import Loader from "../../components/Loader";
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,6 +20,7 @@ const Register = () => {
     answer: "",
   });
   const [photo, setPhoto] = useState("");
+  const [display, setDisplay] = useState("none");
 
   //   Input onChange Value
   const onChange = (e) => {
@@ -29,12 +31,19 @@ const Register = () => {
     e.preventDefault();
     await dispatch(register(credentials));
     dispatch(getUser());
+    setDisplay("block");
+    setTimeout(() => {
+      setDisplay("none");
+    }, );
   };
 
   return (
     <>
       <section id="register-page">
         <Layout>
+          <div className="loader-start">
+            <Loader display={display} />
+          </div>
           <div className="register">
             <div class="container">
               {/* <!-- Outer Row --> */}

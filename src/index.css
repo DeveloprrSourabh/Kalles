@@ -1131,6 +1131,17 @@ span.ans {
   padding: 20px;
   border-radius: 20px;
 }
+.loader-section {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+  display: flex;
+  background: #ffffffbf;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
 /* Mobile Responsive */
 @media only screen and (max-width: 377px) {
   .announce a {

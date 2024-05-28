@@ -106,9 +106,10 @@ exports.userLoginController = async (req, res) => {
       success: true,
       message: "Login Successfully",
       user: {
+        id: user._id,
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: password,
         address: user.address,
         role: user.role,
       },
@@ -182,24 +183,40 @@ exports.userUpdateController = async (req, res) => {
   try {
     const { name, email, address, password, answer } = req.fields;
     const { photo } = req.files;
-    if (!name) {
-      return res.status(400).send({ message: "Name is Required" });
-    }
-    if (!email) {
-      return res.status(400).send({ message: "Email is Required" });
-    }
-    if (!password) {
-      return res.status(400).send({ message: "Password is Required" });
-    }
-    if (!address) {
-      return res.status(400).send({ message: "Address is Required" });
-    }
-    if (!answer) {
-      return res.status(400).send({ message: "Answer is Required" });
+
+    // Get User
+    let user = await User.findById(req.user._id);
+
+    // Validation
+    // if (!name && name === user.name) {
+    //   return res.status(400).send({ message: "Name is Required" });
+    // }
+    // if (!email && email === user.email) {
+    //   return res.status(400).send({ message: "Email is Required" });
+    // }
+    // if (!password && password === user.password) {
+    //   return res.status(400).send({ message: "Password is Required" });
+    // }
+    // if (!address && address === user.address) {
+    //   return res.status(400).send({ message: "Address is Required" });
+    // }
+    // if (!answer && answer === user.answer) {
+    //   return res.status(400).send({ message: "Answer is Required" });
+    // }
+
+    if (
+      (!name || name === user.name) &&
+      (!email || email === user.email) &&
+      (!address || address === user.address) &&
+      (!answer || answer === user.answer) &&
+      (!photo || photo.data == user.photo.data)
+    ) {
+      return res
+        .status(200)
+        .send({ success: false, message: "Please Enter All Fields...." });
     }
 
     // Check User
-    let user = await User.findById(req.user._id);
     if (!user) {
       return res.status(400).send({
         success: false,
@@ -220,17 +237,28 @@ exports.userUpdateController = async (req, res) => {
       user.photo.data = fs.readFileSync(photo.path);
       user.photo.contentType = photo.type;
     }
+
+    //Authentication Token
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
     await user.save();
     return res.status(200).send({
       success: true,
       message: "Profile Updated Succssfully",
-      //   user,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        password: password,
+        address: user.address,
+        role: user.role,
+      },
+      token,
     });
   } catch (error) {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "Error While Updating User PRofile",
+      message: "Error While Updating User Profile",
       error,
     });
   }
@@ -254,6 +282,30 @@ exports.getUserController = async (req, res) => {
     return res.status(400).send({
       success: false,
       message: "Error While Getting User",
+    });
+  }
+};
+
+// Get User Photo
+exports.getUserPhotoController = async (req, res) => {
+  try {
+    let category = await User.findById(req.params.id).select("photo");
+    if (!category) {
+      return res.status(400).send({
+        success: false,
+        message: "User Not Found",
+      });
+    }
+    if (category.photo.data) {
+      res.set("Content-type", category.photo.contentType);
+      return res.status(200).send(category.photo.data);
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting Category Photo",
+      error,
     });
   }
 };

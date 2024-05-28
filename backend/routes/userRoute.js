@@ -4,6 +4,7 @@ const {
   userLoginController,
   userForgotPasswordController,
   userUpdateController,
+  getUserPhotoController,
   getUserController,
 } = require("../controllers/userController");
 const { requireSignIn, isAdmin } = require("../middlewares/authmiddleware");
@@ -30,6 +31,8 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
   return res.status(200).send({ ok: true });
 });
 
+// User PHOTO
+router.get("/user-photo/:id", getUserPhotoController);
 // USER AUTH || METHOD GET
 router.get("/user-auth", requireSignIn, (req, res) => {
   return res.status(200).send({ ok: true });

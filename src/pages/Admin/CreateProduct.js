@@ -90,6 +90,7 @@ const CreateProduct = () => {
     productData.append("sku", product.sku);
     photo && productData.append("photo", photo);
     await dispatch(addProduct(productData));
+    setTimeout(() => {}, []);
   };
   // Getting All Category
   // Getting All Categories
@@ -189,7 +190,7 @@ const CreateProduct = () => {
                                         type="checkbox"
                                         checked={category.includes(e.name)}
                                         onChange={onCheck}
-                                        name="category"
+                                        name="category[]"
                                         value={e._id}
                                       />{" "}
                                       {e.name}

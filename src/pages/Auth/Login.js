@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import PageBanner from "../../components/PageBanner";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useDispatch } from "react-redux";
 import { login } from "../../Slices/useSlice";
+import Loader from "../../components/Loader";
+import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "../../context/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
   const page = location.pathname.replace("/", "");
 
@@ -15,6 +20,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [display, setDisplay] = useState("none");
 
   //   Input OnChange Value
   const onChange = (e) => {
@@ -25,11 +31,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(login(credentails));
+    setDisplay("block");
+    // setTimeout(() => {
+    //   setDisplay("none");
+    // }, 1000);
   };
   return (
     <>
       <section id="login-page">
         <Layout>
+          <div className="loader-start">
+            <Loader display={display} />
+          </div>
           <div className="login">
             <div class="container">
               {/* <!-- Outer Row --> */}

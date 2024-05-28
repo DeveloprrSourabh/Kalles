@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useAuth } from "../context/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../context/auth";
 const host = "http://localhost:8000";
 
 const userSlice = createSlice({
@@ -12,12 +13,14 @@ const userSlice = createSlice({
     user: {},
   },
 
-  extraReducers: (builder) => { 
+  extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       localStorage.setItem("auth", JSON.stringify(action.payload));
     });
     builder.addCase(updateUser.fulfilled, (state, action) => {
-      localStorage.setItem("auth", JSON.stringify(action.payload));
+      if (action.payload !== undefined) {
+        localStorage.setItem("auth", JSON.stringify(action.payload));
+      }
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload;
@@ -28,22 +31,23 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const updateUser = createAsyncThunk(
-  "user/update",
-  async ({ name, email, address, answer, password, photo }) => {
-    const res = await fetch(`${host}/api/v1/auth/update`, {
-      method: "PUT",
+export const updateUser = createAsyncThunk("user/update", async (userData) => {
+  const { data } = await axios.put(
+    `${host}/api/v1/auth/update-user`,
+    userData,
+    {
       headers: {
-        "content-type": "application/json",
-        Authorization: JSON.parse(localStorage.getItem("auth")).token,
+        Authorization: JSON.parse(localStorage?.getItem("auth")).token,
       },
-      body: JSON.stringify({ name, email, address, answer, password, photo }),
-    });
-    const json = await res.json();
-
-    return json;
+    }
+  );
+  if (data?.success) {
+    toast.success(data?.message);
+    return data;
+  } else {
+    toast.error(data?.message);
   }
-);
+});
 
 export const register = createAsyncThunk(
   "user/register",
@@ -58,6 +62,9 @@ export const register = createAsyncThunk(
     const json = await res.json();
     if (json.success) {
       toast.success(json.message);
+      setTimeout(() => {
+        useNavigate("../login");
+      }, [2000]);
     } else {
       toast.error(json.message);
     }
@@ -77,9 +84,12 @@ export const login = createAsyncThunk(
     const json = await res.json();
     if (json.success) {
       toast.success(json.message);
+      setTimeout(() => {}, 2000);
+      console.log(json);
     } else {
       toast.error(json.message);
     }
+    console.log(json);
     return json;
   }
 );
