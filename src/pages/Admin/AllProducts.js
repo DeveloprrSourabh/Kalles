@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../Slices/productSlice";
+import { deleteProduct, getAllProducts } from "../../Slices/productSlice";
 import { Link } from "react-router-dom";
 import Nodata from "../../components/Nodata";
 
@@ -12,7 +12,13 @@ const AllProducts = () => {
     dispatch(getAllProducts());
   }, []);
   const products = useSelector((state) => state.product.allProducts);
-  console.log(products);
+
+  // Delete Product
+  const handleDelete = async (e) => {
+    await dispatch(deleteProduct(e));
+    dispatch(getAllProducts());
+  };
+
   return (
     <>
       <div id="all-products-dashboard">
@@ -24,10 +30,10 @@ const AllProducts = () => {
             <div className="col-lg-9">
               {" "}
               <div className="product-row row-gap-lg-5 pe-5 row">
-                {!products.length === 0 ? (
+                {products.length !== 0 ? (
                   products?.map((item) => {
                     return (
-                      <div className="col-sm-4">
+                      <div key={item._id} className="col-sm-4">
                         <div className="product-card-link">
                           <div className="product-card   p-4 position-relative">
                             <div className="product-card-img">
@@ -66,15 +72,20 @@ const AllProducts = () => {
                                   <div className="option-name">
                                     Delete Product
                                   </div>
-                                  <span className="option-icon">
-                                    <img src="./images/cart.svg" alt="" />
+                                  <span
+                                    className="option-icon "
+                                    onClick={() => {
+                                      handleDelete(item._id);
+                                    }}
+                                  >
+                                    <img src="../../images/delete.svg" alt="" />
                                   </span>
                                 </div>
                               </div>
                             </div>
                             <div className="product-detail  py-2 hover">
                               <Link className="product-card-name">
-                                Ridley High Waist
+                                {item.name}
                               </Link>
                               <div className="pro-card-price d-flex gap-2">
                                 <div className="product-card-price text-danger">

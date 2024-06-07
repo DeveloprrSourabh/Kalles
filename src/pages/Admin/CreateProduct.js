@@ -341,7 +341,7 @@ const CreateProduct = () => {
                       </div>
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-12">
                       <input
                         name="detail"
                         value={product.detail}

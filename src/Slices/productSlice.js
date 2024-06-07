@@ -19,11 +19,17 @@ const productSlice = createSlice({
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.singleProduct = action.payload;
     });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.allProducts = state.allProducts.filter((e) => {
+        return e._id !== action.payload._id;
+      });
+    });
   },
 });
 
 export default productSlice.reducer;
 
+// Add Product
 export const addProduct = createAsyncThunk(
   "product/add",
   async (productData) => {
@@ -58,6 +64,16 @@ export const getAllProducts = createAsyncThunk("get/products", async () => {
 
   //   console.log(products.products);
   return products.products;
+});
+
+//  Delete Products
+export const deleteProduct = createAsyncThunk("delete/products", async (id) => {
+  const res = await fetch(`${host}/api/v1/product/delete-product/${id}`, {
+    method: "DELETE",
+  });
+  const products = await res.json();
+
+  return products.product;
 });
 // Getting Single Products
 export const getSingleProduct = createAsyncThunk(
