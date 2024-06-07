@@ -33,10 +33,12 @@ const productSchema = new mongoose.Schema(
         ref: "Category",
       },
     ],
-    tag: {
-      type: [String],
-      require: true,
-    },
+    tag: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
     sku: {
       type: String,
       required: true,
@@ -45,10 +47,12 @@ const productSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
-    color: {
-      type: [String],
-      required: true,
-    },
+    color: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Color",
+      },
+    ],
     photo: {
       data: Buffer,
       contentType: String,

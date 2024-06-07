@@ -4,6 +4,7 @@ const connectToMongo = require("./config/db");
 const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
+const colorRoute = require("./routes/colorRoute");
 const tagRoute = require("./routes/tagRoute");
 const bodyParser = require("body-parser");
 const app = express();
@@ -26,6 +27,9 @@ app.use("/api/v1/category", categoryRoute);
 
 // Tag Route
 app.use("/api/v1/tag", tagRoute);
+
+// Color Route
+app.use("/api/v1/color", colorRoute);
 
 // User Route
 app.use("/api/v1/auth/", userRoute);

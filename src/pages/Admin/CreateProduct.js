@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../Slices/productSlice";
 import { getAllCategories } from "../../Slices/categorySlice";
 import useCategory from "../../hooks/useCategory";
+import { getAllTags } from "../../Slices/tagSlice";
+import { getAllColors } from "../../Slices/colorSlice";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
@@ -27,34 +29,39 @@ const CreateProduct = () => {
   const [color, setColor] = useState([]);
 
   // Category Function
-  const onCheck = (id) => {
+  const onCheck = (event) => {
+    const { value, checked } = event.target;
     setCategory((prevSelectedCategories) => {
-      if (prevSelectedCategories.includes(id)) {
-        return prevSelectedCategories.filter((categoryId) => categoryId !== id);
+      if (checked) {
+        return [...prevSelectedCategories, value];
       } else {
-        return [...prevSelectedCategories, id];
+        return prevSelectedCategories.filter(
+          (categoryId) => categoryId !== value
+        );
       }
     });
   };
   // Tag Function
   const onCheckTag = (event) => {
     const { value, checked } = event.target;
-
-    if (checked) {
-      setTag([...tag, value]);
-    } else {
-      setTag(tag.filter((tag) => tag !== value));
-    }
+    setTag((prevSelectedTags) => {
+      if (checked) {
+        return [...prevSelectedTags, value];
+      } else {
+        return prevSelectedTags.filter((tagId) => tagId !== value);
+      }
+    });
   };
   // Color Function
   const onCheckColor = (event) => {
     const { value, checked } = event.target;
-
-    if (checked) {
-      setColor([...color, value]);
-    } else {
-      setColor(color.filter((clr) => clr !== value));
-    }
+    setColor((prevSelectedColors) => {
+      if (checked) {
+        return [...prevSelectedColors, value];
+      } else {
+        return prevSelectedColors.filter((colorId) => colorId !== value);
+      }
+    });
   };
   // Size Function
   const onCheckSize = (event) => {
@@ -82,22 +89,40 @@ const CreateProduct = () => {
     productData.append("description", product.description);
     productData.append("quantity", product.quantity);
     productData.append("price", product.price);
-    productData.append("tag", tag);
+    productData.append("tag", JSON.stringify(tag));
     productData.append("detail", product.detail);
-    productData.append("category", category);
+    productData.append("category", JSON.stringify(category));
     productData.append("size", size);
-    productData.append("color", color);
+    productData.append("color", JSON.stringify(color));
     productData.append("sku", product.sku);
     photo && productData.append("photo", photo);
     await dispatch(addProduct(productData));
-    setTimeout(() => {}, []);
+
+    // Reset form fields
+    setProduct({
+      name: "",
+      description: "",
+      quantity: "",
+      price: "",
+      detail: "",
+      sku: "",
+    });
+    setTag([]);
+    setCategory([]);
+    setSize([]);
+    setColor([]);
+    setPhoto(null);
   };
-  // Getting All Category
   // Getting All Categories
   useEffect(() => {
     dispatch(getAllCategories());
+    dispatch(getAllTags());
+    dispatch(getAllColors());
   }, []);
   const allcate = useSelector((state) => state.category.allCategories);
+  const alltag = useSelector((state) => state.tag.allTags);
+  const allcolor = useSelector((state) => state.color.allColors);
+
   return (
     <>
       <div id="admin-product">
@@ -188,7 +213,6 @@ const CreateProduct = () => {
                                     <label>
                                       <input
                                         type="checkbox"
-                                        checked={category.includes(e.name)}
                                         onChange={onCheck}
                                         name="category[]"
                                         value={e._id}
@@ -216,34 +240,23 @@ const CreateProduct = () => {
                             Tags
                           </button>
                           <ul class="dropdown-menu py-2">
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    checked={tag.includes("tag1")}
-                                    onChange={onCheckTag}
-                                    name="tag"
-                                    value="tag1"
-                                  />{" "}
-                                  tag1
-                                </label>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    checked={tag.includes("tag2")}
-                                    onChange={onCheckTag}
-                                    type="checkbox"
-                                    name="tag"
-                                    value="tag2"
-                                  />{" "}
-                                  tag2
-                                </label>
-                              </div>
-                            </li>
+                            {alltag?.map((e) => {
+                              return (
+                                <li>
+                                  <div class="dropdown-item">
+                                    <label>
+                                      <input
+                                        type="checkbox"
+                                        onChange={onCheckTag}
+                                        name="tag[]"
+                                        value={e._id}
+                                      />{" "}
+                                      {e.name}
+                                    </label>
+                                  </div>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       </div>
@@ -306,34 +319,23 @@ const CreateProduct = () => {
                             Select Color
                           </button>
                           <ul class="dropdown-menu py-2">
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    checked={color.includes("Red")}
-                                    onChange={onCheckColor}
-                                    type="checkbox"
-                                    name="color"
-                                    value="Red"
-                                  />{" "}
-                                  Red
-                                </label>
-                              </div>
-                            </li>
-                            <li>
-                              <div class="dropdown-item">
-                                <label>
-                                  <input
-                                    checked={color.includes("Green")}
-                                    onChange={onCheckColor}
-                                    type="checkbox"
-                                    name="color"
-                                    value="Green"
-                                  />{" "}
-                                  Green
-                                </label>
-                              </div>
-                            </li>
+                            {allcolor?.map((e) => {
+                              return (
+                                <li>
+                                  <div class="dropdown-item">
+                                    <label>
+                                      <input
+                                        type="checkbox"
+                                        onChange={onCheckColor}
+                                        name="color[]"
+                                        value={e._id}
+                                      />{" "}
+                                      {e.name}
+                                    </label>
+                                  </div>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       </div>

@@ -21,6 +21,7 @@ exports.addproductController = async (req, res) => {
       slug,
     } = await req.fields;
     const { photo } = req.files;
+
     // Check Existing product
     const existsProduct = await Product.findOne({ name });
     if (existsProduct) {
@@ -28,6 +29,9 @@ exports.addproductController = async (req, res) => {
         .status(400)
         .send({ success: false, message: "Product Already Eixsts" });
     }
+    const categoryArray = JSON.parse(category);
+    const tagArray = JSON.parse(tag);
+    const colorArray = JSON.parse(color);
 
     // Check Validation
     if (!name) {
@@ -93,6 +97,9 @@ exports.addproductController = async (req, res) => {
 
     let product = await new Product({
       ...req.fields,
+      category: categoryArray.map((id) => new mongoose.Types.ObjectId(id)),
+      color: colorArray.map((id) => new mongoose.Types.ObjectId(id)),
+      tag: tagArray.map((id) => new mongoose.Types.ObjectId(id)),
       slug: slugify(name),
     });
     if (photo) {

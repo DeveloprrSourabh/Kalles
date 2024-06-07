@@ -125,6 +125,33 @@ const Adminmenu = () => {
             </div>
           </div>
         </li>
+        {/* <!-- Color Collapse Menu --> */}
+        <li class="nav-item">
+          <Link
+            class="nav-link collapsed"
+            to={"#"}
+            data-toggle="collapse"
+            data-target="#color"
+            aria-expanded="true"
+            aria-controls="color"
+          >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Color</span>
+          </Link>
+          <div
+            id="color"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Tag</h6>
+              <Link class="collapse-item" to="../admin/add-color">
+                Add Color
+              </Link>
+            </div>
+          </div>
+        </li>
         {/* <!-- Divider --> */}
         <hr class="sidebar-divider" />
 

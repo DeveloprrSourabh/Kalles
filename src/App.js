@@ -23,6 +23,7 @@ import AllCategory from "./pages/Admin/AllCategory";
 import UpdateCategory from "./pages/Admin/UpdateCategory";
 import AddTag from "./pages/Admin/AddTag";
 import AllTags from "./pages/Admin/AllTags";
+import AddColor from "./pages/Admin/AddColor";
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
           />
           {/* Tag Routes */}
           <Route path="admin/add-tag" element={<AddTag />} />
-          <Route path="admin/all-tags" element={<AllTags />} />
+          {/* Color Routes */}
+          <Route path="admin/add-color" element={<AddColor />} />
         </Route>
       </Routes>
     </>
