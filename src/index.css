@@ -301,6 +301,7 @@ img.second-img {
 #all-product-dashboard .product-option {
   left: 0;
 }
+
 .product-card:hover .product-option {
   opacity: 1;
   transform: translateY(0);
@@ -360,7 +361,9 @@ img.second-img {
   transform: translateY(-24px);
   filter: brightness(2) invert(1);
 }
-
+.all-dash-del {
+  filter: brightness(20) invert(0) !important;
+}
 .footer-contact-desc:hover img {
   filter: drop-shadow(0px 1000px 0 #56cfe1);
   transform: translateY(-1000px);

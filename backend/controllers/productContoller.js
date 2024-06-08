@@ -32,6 +32,7 @@ exports.addproductController = async (req, res) => {
     const categoryArray = JSON.parse(category);
     const tagArray = JSON.parse(tag);
     const colorArray = JSON.parse(color);
+    const sizeArray = JSON.parse(size);
 
     // Check Validation
     if (!name) {
@@ -100,6 +101,7 @@ exports.addproductController = async (req, res) => {
       category: categoryArray.map((id) => new mongoose.Types.ObjectId(id)),
       color: colorArray.map((id) => new mongoose.Types.ObjectId(id)),
       tag: tagArray.map((id) => new mongoose.Types.ObjectId(id)),
+      size: sizeArray.map((e, i) => e),
       slug: slugify(name),
     });
     if (photo) {
@@ -138,7 +140,12 @@ exports.updateproductController = async (req, res) => {
       slug,
     } = await req.fields;
     const { photo } = req.files;
+    const { proSlug } = req.params;
 
+    const categoryArray = JSON.parse(category);
+    const tagArray = JSON.parse(tag);
+    const colorArray = JSON.parse(color);
+    const sizeArray = JSON.parse(size);
     // Check Validation
     if (!name) {
       return res.status(200).send({
@@ -202,7 +209,7 @@ exports.updateproductController = async (req, res) => {
     }
 
     // Check product
-    let product = await Product.findOne({ name });
+    let product = await Product.findOne({ proSlug });
     if (!product) {
       return res.status(400).send({
         success: false,
@@ -213,6 +220,10 @@ exports.updateproductController = async (req, res) => {
       product._id,
       {
         ...req.fields,
+        category: categoryArray.map((id) => new mongoose.Types.ObjectId(id)),
+        color: colorArray.map((id) => new mongoose.Types.ObjectId(id)),
+        tag: tagArray.map((id) => new mongoose.Types.ObjectId(id)),
+        size: sizeArray.map((e) => e),
         slug: slugify(name),
       },
       { new: true }
@@ -289,6 +300,8 @@ exports.getSingleProductController = async (req, res) => {
   try {
     const product = await Product.findOne({ slug: req.params.slug })
       .populate("category")
+      .populate("tag")
+      .populate("color")
       .select("-photo");
     if (!product) {
       return res.status(400).send({

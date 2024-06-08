@@ -13,6 +13,7 @@ const productSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(addProduct.fulfilled, (state, action) => {});
+    builder.addCase(updateProduct.fulfilled, (state, action) => {});
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.allProducts = action.payload;
     });
@@ -36,6 +37,29 @@ export const addProduct = createAsyncThunk(
     const { data } = await axios.post(
       `${host}/api/v1/product/add-product`,
       productData,
+      {
+        headers: {
+          Authorization: localStorage.getItem("auth").token,
+        },
+      }
+    );
+    if (data?.success) {
+      toast.success(data?.message);
+    } else {
+      toast.error(data?.message);
+    }
+
+    return data;
+  }
+);
+
+// Update Product
+export const updateProduct = createAsyncThunk(
+  "product/update",
+  async (productData) => {
+    const { data } = await axios.put(
+      `${host}/api/v1/product/update-product/${productData.slug}`,
+      productData.productData,
       {
         headers: {
           Authorization: localStorage.getItem("auth").token,
@@ -79,7 +103,7 @@ export const deleteProduct = createAsyncThunk("delete/products", async (id) => {
 export const getSingleProduct = createAsyncThunk(
   "get/singleproduct",
   async (slug) => {
-    const res = await fetch(`${host}/api/v1/product/get-product/hema`, {
+    const res = await fetch(`${host}/api/v1/product/get-product/${slug}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

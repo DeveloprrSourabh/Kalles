@@ -92,7 +92,7 @@ const CreateProduct = () => {
     productData.append("tag", JSON.stringify(tag));
     productData.append("detail", product.detail);
     productData.append("category", JSON.stringify(category));
-    productData.append("size", size);
+    productData.append("size", JSON.stringify(size));
     productData.append("color", JSON.stringify(color));
     productData.append("sku", product.sku);
     photo && productData.append("photo", photo);
@@ -281,7 +281,7 @@ const CreateProduct = () => {
                                     checked={size.includes("M")}
                                     onChange={onCheckSize}
                                     type="checkbox"
-                                    name="size"
+                                    name="size[]"
                                     value="M"
                                   />{" "}
                                   M
@@ -295,7 +295,7 @@ const CreateProduct = () => {
                                     checked={size.includes("L")}
                                     onChange={onCheckSize}
                                     type="checkbox"
-                                    name="size"
+                                    name="size[]"
                                     value="L"
                                   />{" "}
                                   L

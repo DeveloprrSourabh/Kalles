@@ -64,16 +64,16 @@ const AllProducts = () => {
                                       Edit Product
                                     </div>
                                     <span className="option-icon">
-                                      <img src="./images/eye.svg" alt="" />
+                                      <img src="../../images/eye.svg" alt="" />
                                     </span>
                                   </div>
                                 </Link>
                                 <div className="first-option position-relative">
-                                  <div className="option-name">
+                                  <div className=" option-name">
                                     Delete Product
                                   </div>
                                   <span
-                                    className="option-icon "
+                                    className="all-dash-del option-icon "
                                     onClick={() => {
                                       handleDelete(item._id);
                                     }}
