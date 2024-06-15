@@ -220,10 +220,10 @@ exports.updateproductController = async (req, res) => {
       product._id,
       {
         ...req.fields,
-        category: categoryArray.map((id) => new mongoose.Types.ObjectId(id)),
-        color: colorArray.map((id) => new mongoose.Types.ObjectId(id)),
-        tag: tagArray.map((id) => new mongoose.Types.ObjectId(id)),
-        size: sizeArray.map((e) => e),
+        category: categoryArray?.map((id) => new mongoose.Types.ObjectId(id)),
+        color: colorArray?.map((id) => new mongoose.Types.ObjectId(id)),
+        tag: tagArray?.map((id) => new mongoose.Types.ObjectId(id)),
+        size: sizeArray?.map((e, i) => e),
         slug: slugify(name),
       },
       { new: true }
@@ -299,9 +299,18 @@ exports.deleteProductController = async (req, res) => {
 exports.getSingleProductController = async (req, res) => {
   try {
     const product = await Product.findOne({ slug: req.params.slug })
-      .populate("category")
-      .populate("tag")
-      .populate("color")
+      .populate({
+        path: "category",
+        select: "_id",
+      })
+      .populate({
+        path: "tag",
+        select: "_id",
+      })
+      .populate({
+        path: "color",
+        select: "_id",
+      })
       .select("-photo");
     if (!product) {
       return res.status(400).send({

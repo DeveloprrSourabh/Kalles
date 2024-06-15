@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addProduct,
-  getSingleProduct,
-  updateProduct,
-} from "../../Slices/productSlice";
+import { getSingleProduct, updateProduct } from "../../Slices/productSlice";
 import { getAllCategories } from "../../Slices/categorySlice";
 import { getAllTags } from "../../Slices/tagSlice";
 import { getAllColors } from "../../Slices/colorSlice";
@@ -53,10 +49,10 @@ const UpdateProduct = () => {
         quantity: singleProduct.quantity || "",
         sku: singleProduct.sku || "",
       });
-      setCategory(singleProduct.category || []);
-      setTag(singleProduct.tag || []);
+      setCategory(singleProduct.category?.map((e) => e._id) || []);
+      setTag(singleProduct.tag?.map((e) => e._id) || []);
       setSize(singleProduct.size || []);
-      setColor(singleProduct.color || []);
+      setColor(singleProduct.color?.map((e) => e._id) || []);
     }
   }, [singleProduct]);
 
@@ -65,10 +61,10 @@ const UpdateProduct = () => {
     const { value, checked } = event.target;
     setCategory((prevSelectedCategories) => {
       if (checked) {
-        return [...prevSelectedCategories, { _id: value }];
+        return [...prevSelectedCategories, value];
       } else {
         return prevSelectedCategories.filter(
-          (category) => category._id !== value
+          (categoryId) => categoryId !== value
         );
       }
     });
@@ -79,9 +75,9 @@ const UpdateProduct = () => {
     const { value, checked } = event.target;
     setTag((prevSelectedTags) => {
       if (checked) {
-        return [...prevSelectedTags, { _id: value }];
+        return [...prevSelectedTags, value];
       } else {
-        return prevSelectedTags.filter((tag) => tag._id !== value);
+        return prevSelectedTags.filter((tag) => tag !== value);
       }
     });
   };
@@ -91,9 +87,9 @@ const UpdateProduct = () => {
     const { value, checked } = event.target;
     setColor((prevSelectedColors) => {
       if (checked) {
-        return [...prevSelectedColors, { _id: value }];
+        return [...prevSelectedColors, value];
       } else {
-        return prevSelectedColors.filter((color) => color._id !== value);
+        return prevSelectedColors.filter((color) => color !== value);
       }
     });
   };
@@ -107,7 +103,9 @@ const UpdateProduct = () => {
       setSize(size.filter((sz) => sz !== value));
     }
   };
-
+  useEffect(() => {
+    console.log(size);
+  }, [onCheckSize]);
   // Input OnChange Value
   const onChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -222,9 +220,9 @@ const UpdateProduct = () => {
                                   <label>
                                     <input
                                       type="checkbox"
-                                      checked={category.some(
-                                        (el) => el._id === e._id
-                                      )}
+                                      checked={
+                                        category && category.includes(e._id)
+                                      }
                                       onChange={onCheck}
                                       name="category[]"
                                       value={e._id}
@@ -259,9 +257,7 @@ const UpdateProduct = () => {
                                   <label>
                                     <input
                                       type="checkbox"
-                                      checked={tag.some(
-                                        (el) => el._id === e._id
-                                      )}
+                                      checked={tag && tag.includes(e._id)}
                                       onChange={onCheckTag}
                                       name="tag[]"
                                       value={e._id}
@@ -341,9 +337,7 @@ const UpdateProduct = () => {
                                   <label>
                                     <input
                                       type="checkbox"
-                                      checked={color.some(
-                                        (el) => el._id === e._id
-                                      )}
+                                      checked={color && color.includes(e._id)}
                                       onChange={onCheckColor}
                                       name="color[]"
                                       value={e._id}

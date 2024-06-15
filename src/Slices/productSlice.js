@@ -71,6 +71,7 @@ export const updateProduct = createAsyncThunk(
     } else {
       toast.error(data?.message);
     }
+    console.log(data);
 
     return data;
   }

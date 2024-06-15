@@ -34,13 +34,14 @@ const CreateProduct = () => {
     setCategory((prevSelectedCategories) => {
       if (checked) {
         return [...prevSelectedCategories, value];
-      } else {
+      } else {  
         return prevSelectedCategories.filter(
           (categoryId) => categoryId !== value
         );
       }
     });
   };
+
   // Tag Function
   const onCheckTag = (event) => {
     const { value, checked } = event.target;
