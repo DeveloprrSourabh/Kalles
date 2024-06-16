@@ -53,10 +53,16 @@ const productSchema = new mongoose.Schema(
         ref: "Color",
       },
     ],
+
     photo: {
       data: Buffer,
       contentType: String,
     },
+    images: ["Strings"],
+    // {
+    //   data: Buffer,
+    //   contentType: String,
+    // },
     arrived: {
       type: Boolean,
       default: false,

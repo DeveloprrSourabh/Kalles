@@ -9,6 +9,7 @@ const productSlice = createSlice({
   initialState: {
     allProducts: [],
     singleProduct: {},
+    singleProductView: {},
   },
 
   extraReducers: (builder) => {
@@ -19,6 +20,9 @@ const productSlice = createSlice({
     });
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.singleProduct = action.payload;
+    });
+    builder.addCase(getSingleProductView.fulfilled, (state, action) => {
+      state.singleProductView = action.payload;
     });
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.allProducts = state.allProducts.filter((e) => {
@@ -40,6 +44,7 @@ export const addProduct = createAsyncThunk(
       {
         headers: {
           Authorization: localStorage.getItem("auth").token,
+          "Content-Type": "multipart/form-data",
         },
       }
     );
@@ -48,7 +53,6 @@ export const addProduct = createAsyncThunk(
     } else {
       toast.error(data?.message);
     }
-
     return data;
   }
 );
@@ -100,11 +104,26 @@ export const deleteProduct = createAsyncThunk("delete/products", async (id) => {
 
   return products.product;
 });
-// Getting Single Products
+// Getting Single Products For Update
 export const getSingleProduct = createAsyncThunk(
   "get/singleproduct",
   async (slug) => {
     const res = await fetch(`${host}/api/v1/product/get-product/${slug}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const product = await res.json();
+    console.log(product);
+    return product.product;
+  }
+);
+// Getting Single Products For View
+export const getSingleProductView = createAsyncThunk(
+  "get/singleproductview",
+  async (slug) => {
+    const res = await fetch(`${host}/api/v1/product/get-productview/${slug}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",

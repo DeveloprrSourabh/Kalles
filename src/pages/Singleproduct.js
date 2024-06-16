@@ -1,20 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import $ from "jquery";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleProduct } from "../Slices/productSlice";
+import { getSingleProduct, getSingleProductView } from "../Slices/productSlice";
 
-const Singleproduct = () => {
+const host = "http://localhost:8000";
+
+const Singleproduct = (req) => {
+  let { slug } = useParams();
+  console.log(useParams);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSingleProduct());
+    dispatch(getSingleProductView(slug));
   }, []);
-  const product = useSelector((state) => state.product.singleProduct);
+  const product = useSelector((state) => state.product.singleProductView);
   console.log(product);
 
-  const [imgurl, setImgurl] = useState("/images/prod11.webp");
+  const [imgurl, setImgurl] = useState(
+    `${host}/api/v1/product/product-photo/${product?.slug}`
+  );
   $(".tabs").click(function () {
     var contClass = $(this).data("div");
 
@@ -40,9 +46,11 @@ const Singleproduct = () => {
       <section id="single-product-page ">
         <Layout>
           <div className="top-breadcrumb hover px-5 ">
-            <Link className="current-product">Home ⨠ </Link>
+            <Link to={"../"} className="current-product">
+              Home ⨠{" "}
+            </Link>
             <span className="current-product text-secondary">
-              Leather White Trainers
+              {product?.name}
             </span>
           </div>
           <div className="singleproduct-row row  mx-5 py-3 my-5">
@@ -52,79 +60,58 @@ const Singleproduct = () => {
                 <div className="single-pro-min">
                   <div
                     className="single-pro-multi-img mb-2"
-                    onMouseOver={() => setImgurl("/images/prod1.webp")}
+                    onMouseOver={() =>
+                      setImgurl(
+                        `${host}/api/v1/product/product-photo/${product?.slug}`
+                      )
+                    }
                   >
-                    <img src="/images/prod1.webp" alt="" />
-                  </div>
-                  <div
-                    className="single-pro-multi-img mb-2"
-                    onMouseOver={() => setImgurl("/images/prod11.webp")}
-                  >
-                    <img src="/images/prod11.webp" alt="" />
-                  </div>
-                  <div
-                    className="single-pro-multi-img mb-2"
-                    onMouseOver={() => setImgurl("/images/prod2.webp")}
-                  >
-                    <img src="/images/prod2.webp" alt="" />
-                  </div>
-                  <div
-                    className="single-pro-multi-img mb-2"
-                    onMouseOver={() => setImgurl("/images/prod22.webp")}
-                  >
-                    <img src="/images/prod22.webp" alt="" />
+                    <img
+                      src={`${host}/api/v1/product/product-photo/${product?.slug}`}
+                      alt=""
+                    />
                   </div>
                 </div>
                 {/* Single big img */}
                 <div className="pro-slider-start">
                   <div className="main-product-slide">
-                    <img src={imgurl} alt="" />
+                    <img width={"100%"} src={imgurl} alt="" />
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="single-pro-details">
-                <h2 className="single-pro-name">Leather White Trainers</h2>
+                <h2 className="single-pro-name"> {product?.name}</h2>
                 <div className="d-flex align-items-center justify-content-between pb-3">
-                  <span className="single-pro-price">$200</span>{" "}
+                  <span className="single-pro-price">$ {product?.price}</span>{" "}
                   <span className="review-stars">
                     ⭐️⭐️⭐️⭐️( 1 review ){" "}
                   </span>
                 </div>
                 <div className="single-pro-desc pb-4">
-                  Go kalles this summer with this vintage navy and white striped
-                  v-neck t-shirt from the Nike. Perfect for pairing with denim
-                  and white kicks for a stylish kalles vibe.
+                  {product?.descrition}
                 </div>
                 <div className="size pb-4">
                   <div className="selected-size pb-3">SIZE: S</div>
                   <div className="d-flex gap-3">
-                    <span className="single-pro-size">S</span>
-                    <span className="single-pro-size">M</span>
-                    <span className="single-pro-size">L</span>
-                    <span className="single-pro-size">XL</span>
+                    {product?.size?.map((sz) => {
+                      return <span className="single-pro-size">{sz}</span>;
+                    })}
                   </div>
                 </div>
                 <div className="size pb-4">
                   <div className="selected-size  pb-3">Color: BLACK</div>
                   <div className="d-flex  gap-3">
-                    <span
-                      className="single-pro-color"
-                      style={{ background: "red" }}
-                    ></span>
-                    <span
-                      className="single-pro-color"
-                      style={{ background: "red" }}
-                    ></span>
-                    <span
-                      className="single-pro-color"
-                      style={{ background: "red" }}
-                    ></span>
-                    <span
-                      className="single-pro-color"
-                      style={{ background: "red" }}
-                    ></span>
+                    {product?.color?.map((clr) => {
+                      return (
+                        <span
+                          className="single-pro-color"
+                          id={clr.name}
+                          style={{ background: clr.name }}
+                        ></span>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="single-pro-cart d-flex align-items-center pb-4 gap-3">
@@ -141,7 +128,7 @@ const Singleproduct = () => {
                 <div className="pro-main-detail">
                   <div className="single-pro-detail">
                     <span className="que">SKU:</span>{" "}
-                    <span className="ans">Sport Clothes-1</span>
+                    <span className="ans">{product?.sku}</span>
                   </div>
                   <div className="single-pro-detail py-1">
                     <span className="que">Availability: </span>{" "}
@@ -150,14 +137,27 @@ const Singleproduct = () => {
                   <div className="single-pro-detail py-1">
                     <span className="que">Categories: </span>{" "}
                     <span className="ans">
-                      <Link> Men</Link>
+                      {product?.category?.map((cat) => {
+                        return (
+                          <Link to={`../category/${cat.name}`}>
+                            {" "}
+                            {cat.name}
+                          </Link>
+                        );
+                      })}
                     </span>
                   </div>
                   <div className="single-pro-detail hover">
                     <span className="que">Tags: </span>{" "}
                     <span className="ans">
-                      <Link> Sport</Link>
-                      <Link> Sport</Link>
+                      {product?.tag?.map((tag) => {
+                        return (
+                          <Link to={`../category/${tag.name}`}>
+                            {" "}
+                            {tag.name}
+                          </Link>
+                        );
+                      })}
                     </span>
                   </div>
                 </div>

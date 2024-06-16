@@ -7,6 +7,7 @@ const {
   getSingleProductController,
   getProductPhotoController,
   topProductController,
+  getSingleProductViewController,
 } = require("../controllers/productContoller");
 const formidable = require("express-formidable");
 
@@ -26,6 +27,7 @@ router.delete("/delete-product/:id", deleteProductController);
 
 // GET SINGLE PRODUCT
 router.get("/get-product/:slug", getSingleProductController);
+router.get("/get-productview/:slug", getSingleProductViewController);
 
 // PRODUCT PHOTO
 router.get("/product-photo/:slug", getProductPhotoController);

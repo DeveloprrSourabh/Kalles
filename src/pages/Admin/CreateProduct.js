@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Adminmenu from "../../components/Adminmenu";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,13 +28,45 @@ const CreateProduct = () => {
   const [size, setSize] = useState([]);
   const [color, setColor] = useState([]);
 
+  const [images, setImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+
+  // Multiple Images
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    // Prepare preview images
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setPreviewImages(previews);
+
+    // Prepare images for state
+    const newImages = files.map((file) => ({
+      file: file,
+      name: file.name,
+    }));
+    setImages(newImages);
+  };
+
+  const handleRemoveImage = (index) => {
+    // Create a copy of images state and remove the image at index
+    const updatedImages = [...images];
+    updatedImages.splice(index, 1); // Remove the image at the specified index
+    setImages(updatedImages);
+
+    // Update preview images
+    const updatedPreviews = [...previewImages];
+    updatedPreviews.splice(index, 1); // Remove the preview at the specified index
+
+    setPreviewImages(updatedPreviews);
+  };
+
   // Category Function
   const onCheck = (event) => {
     const { value, checked } = event.target;
     setCategory((prevSelectedCategories) => {
       if (checked) {
         return [...prevSelectedCategories, value];
-      } else {  
+      } else {
         return prevSelectedCategories.filter(
           (categoryId) => categoryId !== value
         );
@@ -82,37 +114,45 @@ const CreateProduct = () => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  //   Login Function
+  //   Add Product Function
   const handleSubmit = async (e) => {
     e.preventDefault();
     const productData = new FormData();
-    productData.append("name", product.name);
-    productData.append("description", product.description);
-    productData.append("quantity", product.quantity);
-    productData.append("price", product.price);
-    productData.append("tag", JSON.stringify(tag));
-    productData.append("detail", product.detail);
-    productData.append("category", JSON.stringify(category));
-    productData.append("size", JSON.stringify(size));
-    productData.append("color", JSON.stringify(color));
-    productData.append("sku", product.sku);
-    photo && productData.append("photo", photo);
+    await productData.append("name", product.name);
+    await productData.append("description", product.description);
+    await productData.append("quantity", product.quantity);
+    await productData.append("price", product.price);
+    await productData.append("tag", JSON.stringify(tag));
+    await productData.append("detail", product.detail);
+    await productData.append("category", JSON.stringify(category));
+    await productData.append("size", JSON.stringify(size));
+    await productData.append("color", JSON.stringify(color));
+    await productData.append("sku", product.sku);
+    (await photo) && productData.append("photo", photo);
+
+    (await images) &&
+      images.forEach((image, index) => {
+        productData.append(`images[${index}]`, image.file);
+      });
+    console.log(productData);
+
     await dispatch(addProduct(productData));
 
     // Reset form fields
-    setProduct({
-      name: "",
-      description: "",
-      quantity: "",
-      price: "",
-      detail: "",
-      sku: "",
-    });
-    setTag([]);
-    setCategory([]);
-    setSize([]);
-    setColor([]);
-    setPhoto(null);
+    // setProduct({
+    //   name: "",
+    //   description: "",
+    //   quantity: "",
+    //   price: "",
+    //   detail: "",
+    //   sku: "",
+    // });
+    // setTag([]);
+    // setCategory([]);
+    // setSize([]);
+    // setColor([]);
+    // setPhoto(null);
+    // setImages(null);
   };
   // Getting All Categories
   useEffect(() => {
@@ -135,7 +175,7 @@ const CreateProduct = () => {
             <div className="col-lg-9">
               <div className="item-add-form py-5 pe-5">
                 <form action="" method="POST">
-                  <div className="item-photo">
+                  <div className="item-photo d-flex gap-4">
                     <label>
                       <div className="select-item-photo">
                         {photo && (
@@ -155,6 +195,47 @@ const CreateProduct = () => {
                         name="photo"
                       />
                     </label>
+
+                    <div className="multiple-images">
+                      <div className=" select-item-photo">
+                        {previewImages.map((preview, index) => (
+                          <>
+                            <div className={`${index} multi position-relative`}>
+                              <img
+                                key={index}
+                                src={preview}
+                                alt=""
+                                className={`${index}`}
+                                id="multiimg"
+                              />
+
+                              <span
+                                className="img-cut"
+                                onClick={() => handleRemoveImage(index)}
+                              >
+                                ✕
+                              </span>
+                            </div>
+                          </>
+                        ))}
+                      </div>
+                      <label className=" ">
+                        <div className="item-img-name">
+                          {images.length > 0
+                            ? `${images.length} images selected`
+                            : "Upload Photos"}
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          multiple
+                          hidden
+                          id="fileInput"
+                          name="images"
+                        />
+                      </label>
+                    </div>
                   </div>
                   <div className="row">
                     <div className="col-sm-6">

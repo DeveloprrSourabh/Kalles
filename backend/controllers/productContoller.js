@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/productModel");
 const { default: slugify } = require("slugify");
 const fs = require("fs");
+const formidable = require("formidable");
 
 // Add Product
 exports.addproductController = async (req, res) => {
@@ -20,7 +21,8 @@ exports.addproductController = async (req, res) => {
       arrived,
       slug,
     } = await req.fields;
-    const { photo } = req.files;
+
+    const { photo, images } = req.files;
 
     // Check Existing product
     const existsProduct = await Product.findOne({ name });
@@ -104,6 +106,22 @@ exports.addproductController = async (req, res) => {
       size: sizeArray.map((e, i) => e),
       slug: slugify(name),
     });
+    // Handle multiple images
+    if (images && Array.isArray(images)) {
+      console.log(images);
+      product.images = images.map((img, index) => ({
+        data: fs.readFileSync(img.path),
+        contentType: img.type,
+      }));
+    } else if (images) {
+      console.log(images);
+      product.images = [
+        {
+          data: fs.readFileSync(images.path),
+          contentType: images.type,
+        },
+      ];
+    }
     if (photo) {
       product.photo.data = fs.readFileSync(photo.path);
       product.photo.contentType = photo.type;
@@ -295,7 +313,7 @@ exports.deleteProductController = async (req, res) => {
     });
   }
 };
-// Get Single Product
+// Get Single Product For Update
 exports.getSingleProductController = async (req, res) => {
   try {
     const product = await Product.findOne({ slug: req.params.slug })
@@ -311,6 +329,34 @@ exports.getSingleProductController = async (req, res) => {
         path: "color",
         select: "_id",
       })
+      .select("-photo");
+    if (!product) {
+      return res.status(400).send({
+        success: false,
+        message: "Product Not Found",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: "Getting Single Product",
+      product,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: false,
+      message: "Error While Getting Single Product",
+      error,
+    });
+  }
+};
+// Get Single Product For View
+exports.getSingleProductViewController = async (req, res) => {
+  try {
+    const product = await Product.findOne({ slug: req.params.slug })
+      .populate("category")
+      .populate("tag")
+      .populate("color")
       .select("-photo");
     if (!product) {
       return res.status(400).send({
