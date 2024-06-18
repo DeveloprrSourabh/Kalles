@@ -17,12 +17,6 @@ const Bestseller = () => {
           </div>
           <div className="trending-row py-3 row">
             <Productcard />
-
-            <Productcard />
-
-            <Productcard />
-
-            <Productcard />
           </div>
         </div>
       </div>

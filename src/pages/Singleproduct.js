@@ -5,12 +5,13 @@ import $ from "jquery";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct, getSingleProductView } from "../Slices/productSlice";
+import { useCart } from "../context/cart";
+import toast from "react-hot-toast";
 
 const host = "http://localhost:8000";
 
 const Singleproduct = (req) => {
   let { slug } = useParams();
-  console.log(useParams);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSingleProductView(slug));
@@ -19,11 +20,13 @@ const Singleproduct = (req) => {
   console.log(product);
 
   const [imgurl, setImgurl] = useState(
-    `${host}/api/v1/product/product-photo/${product?.slug}`
+    `${host}/api/v1/product/product-photo/${slug}`
   );
+  useEffect(() => {
+    setImgurl(`${host}/api/v1/product/product-photo/${slug}`);
+  }, []);
   $(".tabs").click(function () {
     var contClass = $(this).data("div");
-
     $(".content")
       .hide()
       .filter("." + contClass)
@@ -36,6 +39,9 @@ const Singleproduct = (req) => {
   const [nav2, setNav2] = useState(null);
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
+
+  // Cart
+  const [cart, setCart] = useCart();
 
   useEffect(() => {
     setNav1(sliderRef1);
@@ -61,13 +67,11 @@ const Singleproduct = (req) => {
                   <div
                     className="single-pro-multi-img mb-2"
                     onMouseOver={() =>
-                      setImgurl(
-                        `${host}/api/v1/product/product-photo/${product?.slug}`
-                      )
+                      setImgurl(`${host}/api/v1/product/product-photo/${slug}`)
                     }
                   >
                     <img
-                      src={`${host}/api/v1/product/product-photo/${product?.slug}`}
+                      src={`${host}/api/v1/product/product-photo/${slug}`}
                       alt=""
                     />
                   </div>
@@ -120,7 +124,19 @@ const Singleproduct = (req) => {
                     <span className="operator">1</span>
                     <span className="operator">+</span>
                   </div>
-                  <div className="add-cart-btn effect">ADD TO CART</div>
+                  <div
+                    onClick={() => {
+                      setCart([...cart, product]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, product])
+                      );
+                      toast.success("Item Added to cart");
+                    }}
+                    className="add-cart-btn effect"
+                  >
+                    ADD TO CART
+                  </div>
                   <div className="wishlist-btn effect">
                     <img src="/images/wish.svg" width={20} alt="" />
                   </div>

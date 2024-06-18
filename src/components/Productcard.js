@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Nodata from "./Nodata";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../Slices/productSlice";
+import toast from "react-hot-toast";
+import { useCart } from "../context/cart";
 
 const Productcard = () => {
   const host = "http://localhost:8000";
@@ -10,11 +12,14 @@ const Productcard = () => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
+
+  // Cart
+  const [cart, setCart] = useCart();
   const products = useSelector((state) => state.product.allProducts);
   return (
     <>
       {products.length !== 0 ? (
-        products?.map((item) => {
+        products?.map((item, index) => {
           return (
             <div key={item._id} className="col-sm-4">
               <div className="product-card-link">
@@ -51,7 +56,7 @@ const Productcard = () => {
                         <div className=" option-name">Add To Cart</div>
                         <span className="all-dash-del option-icon text-light ">
                           {/* <img src="../../images/delete.svg" alt="" /> */}
-                          <h3 >+</h3 >
+                          <h3>+</h3>
                         </span>
                       </div>
                     </div>
@@ -84,6 +89,8 @@ const Productcard = () => {
               </div>
             </div>
           );
+          {
+          }
         })
       ) : (
         <Nodata message="product" />
