@@ -870,7 +870,16 @@ span.single-pro-price {
 .operator {
   cursor: pointer;
   font-weight: 700;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
 }
+.operator:hover {
+  background-color: #000000e5;
+  color: #fff;
+}
+
 .wishlist-btn {
   cursor: pointer;
 }

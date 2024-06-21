@@ -40,6 +40,9 @@ const Singleproduct = (req) => {
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
 
+  // Cart Count
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);
@@ -117,9 +120,28 @@ const Singleproduct = (req) => {
                 </div>
                 <div className="single-pro-cart d-flex align-items-center pb-4 gap-3">
                   <div className="quantity d-flex justify-content-between gap-4">
-                    <span className="operator">—</span>
-                    <span className="operator">1</span>
-                    <span className="operator">+</span>
+                    <button
+                      onClick={() => {
+                        setCount((pre) => {
+                          return pre - 1;
+                        });
+                      }}
+                      className="operator"
+                      disabled={count === 0 ? true : false}
+                    >
+                      —
+                    </button>
+                    <span className="">{count}</span>
+                    <button
+                      onClick={() => {
+                        setCount((pre) => {
+                          return pre + 1;
+                        });
+                      }}
+                      className="operator"
+                    >
+                      +
+                    </button>
                   </div>
                   <div className="add-cart-btn effect">ADD TO CART</div>
                   <div className="wishlist-btn effect">
