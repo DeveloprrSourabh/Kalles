@@ -5,6 +5,7 @@ const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
 const colorRoute = require("./routes/colorRoute");
+const cartRoute = require("./routes/cartRoute");
 const tagRoute = require("./routes/tagRoute");
 const bodyParser = require("body-parser");
 const app = express();
@@ -33,6 +34,9 @@ app.use("/api/v1/color", colorRoute);
 
 // User Route
 app.use("/api/v1/auth/", userRoute);
+
+// Cart Route
+app.use("/api/v1/product", cartRoute);
 
 app.listen(8000, () => {
   console.log(`Server is running on Port 8000`);

@@ -6,6 +6,10 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
     },
+    count: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );

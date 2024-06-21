@@ -40,9 +40,6 @@ const Singleproduct = (req) => {
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
 
-  // Cart
-  const [cart, setCart] = useCart();
-
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);
@@ -124,19 +121,7 @@ const Singleproduct = (req) => {
                     <span className="operator">1</span>
                     <span className="operator">+</span>
                   </div>
-                  <div
-                    onClick={() => {
-                      setCart([...cart, product]);
-                      localStorage.setItem(
-                        "cart",
-                        JSON.stringify([...cart, product])
-                      );
-                      toast.success("Item Added to cart");
-                    }}
-                    className="add-cart-btn effect"
-                  >
-                    ADD TO CART
-                  </div>
+                  <div className="add-cart-btn effect">ADD TO CART</div>
                   <div className="wishlist-btn effect">
                     <img src="/images/wish.svg" width={20} alt="" />
                   </div>

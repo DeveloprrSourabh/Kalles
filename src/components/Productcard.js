@@ -14,7 +14,7 @@ const Productcard = () => {
   }, []);
 
   // Cart
-  const [cart, setCart] = useCart();
+  // const [cart, setCart] = useCart();
   const products = useSelector((state) => state.product.allProducts);
   return (
     <>
