@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct, getSingleProductView } from "../Slices/productSlice";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
+import { addCart, getAllCarts } from "../Slices/cartSlice";
 
 const host = "http://localhost:8000";
 
@@ -17,7 +18,6 @@ const Singleproduct = (req) => {
     dispatch(getSingleProductView(slug));
   }, []);
   const product = useSelector((state) => state.product.singleProductView);
-  console.log(product);
 
   const [imgurl, setImgurl] = useState(
     `${host}/api/v1/product/product-photo/${slug}`
@@ -41,12 +41,39 @@ const Singleproduct = (req) => {
   let sliderRef2 = useRef(null);
 
   // Cart Count
-  const [count, setCount] = useState(0);
-
+  const [counts, setCounts] = useState(1);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);
   }, []);
+
+  // Update cardentials whenever counts changes
+  useEffect(() => {
+    setCardentials((prevCardentials) => ({
+      ...prevCardentials,
+      count: counts,
+    }));
+  }, [counts]);
+
+  const [cardentials, setCardentials] = useState({
+    id: product._id,
+    count: counts,
+  });
+  useEffect(() => {
+    dispatch(getAllCarts());
+  }, []);
+  // Check if the product is in the cart
+  let allCart = useSelector((state) => state.cart.allCarts);
+    const isInCart =
+      allCart?.some((crt) => crt?.proId?.slug === product?.slug) || isAddedToCart;
+  // Add Product to Cart
+  const addToCart = () => {
+    dispatch(addCart({ ...cardentials, proId: product._id }));
+    dispatch(getAllCarts());
+    setIsAddedToCart(true);
+  };
+
   return (
     <>
       <section id="single-product-page ">
@@ -119,31 +146,47 @@ const Singleproduct = (req) => {
                   </div>
                 </div>
                 <div className="single-pro-cart d-flex align-items-center pb-4 gap-3">
-                  <div className="quantity d-flex justify-content-between gap-4">
-                    <button
-                      onClick={() => {
-                        setCount((pre) => {
-                          return pre - 1;
-                        });
-                      }}
-                      className="operator"
-                      disabled={count === 0 ? true : false}
+                  {!isInCart ? (
+                    <>
+                      <div className="quantity d-flex justify-content-between gap-4">
+                        <button
+                          onClick={() => {
+                            setCounts((pre) => {
+                              return pre - 1;
+                            });
+                          }}
+                          className="operator"
+                          disabled={counts === 1 ? true : false}
+                        >
+                          —
+                        </button>
+                        <span className="">{counts}</span>
+                        <button
+                          onClick={() => {
+                            setCounts((pre) => {
+                              return pre + 1;
+                            });
+                          }}
+                          className="operator"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <button
+                        onClick={addToCart}
+                        className="border-0 add-cart-btn effect"
+                      >
+                        ADD TO CART
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      to="../cart"
+                      className="text-light border-0 add-cart-btn effect"
                     >
-                      —
-                    </button>
-                    <span className="">{count}</span>
-                    <button
-                      onClick={() => {
-                        setCount((pre) => {
-                          return pre + 1;
-                        });
-                      }}
-                      className="operator"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div className="add-cart-btn effect">ADD TO CART</div>
+                      View Cart
+                    </Link>
+                  )}
                   <div className="wishlist-btn effect">
                     <img src="/images/wish.svg" width={20} alt="" />
                   </div>

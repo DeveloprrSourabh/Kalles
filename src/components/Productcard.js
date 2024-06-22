@@ -1,25 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Nodata from "./Nodata";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../Slices/productSlice";
 import toast from "react-hot-toast";
-import { useCart } from "../context/cart";
+import { useCart, CartProvider } from "../context/cart";
+import { addCart, getAllCarts } from "../Slices/cartSlice";
 
 const Productcard = () => {
   const host = "http://localhost:8000";
   const dispatch = useDispatch();
+  const [cart, setCart] = useCart();
+  const [sets, setSets] = useState([]);
+
+  const products = useSelector((state) => state.product.allProducts);
+  const allcrt = useSelector((state) => state.cart.allCarts);
+
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+    dispatch(getAllCarts());
+  }, [dispatch]);
 
-  // Cart
-  // const [cart, setCart] = useCart();
-  const products = useSelector((state) => state.product.allProducts);
+  useEffect(() => {
+    setSets(allcrt);
+  }, [allcrt]);
+
+  // Cart Credentials
+  const [credentials, setCredentials] = useState({
+    count: 1,
+  });
+
+  // Product Add To Cart
+  const addToCart = async (proId) => {
+    await dispatch(addCart({ ...credentials, proId: proId }));
+    dispatch(getAllCarts());
+  };
+
   return (
     <>
       {products.length !== 0 ? (
-        products?.map((item, index) => {
+        products?.map((item) => {
           return (
             <div key={item._id} className="col-sm-4">
               <div className="product-card-link">
@@ -41,10 +61,9 @@ const Productcard = () => {
                   <div className="product-option position-absolute">
                     <div className="product-card-heart d-flex justify-content-center align-content-center">
                       <img src="./images/wish.svg" alt="" />
-                    </div>{" "}
+                    </div>
                     <div className="product-card-view">
                       <Link to={`../shop/${item.slug}`}>
-                        {" "}
                         <div className="first-option position-relative my-3">
                           <div className="option-name">View Product</div>
                           <span className="option-icon">
@@ -52,13 +71,41 @@ const Productcard = () => {
                           </span>
                         </div>
                       </Link>
-                      <div className="first-option position-relative">
-                        <div className=" option-name">Add To Cart</div>
-                        <span className="all-dash-del option-icon text-light ">
-                          {/* <img src="../../images/delete.svg" alt="" /> */}
-                          <h3>+</h3>
-                        </span>
-                      </div>
+                      {sets && sets.length > 0 ? (
+                        sets.some((crt) => crt?.proId?._id === item._id) ? (
+                          <Link to={`../cart`}>
+                            <div className="first-option position-relative my-3">
+                              <div className="option-name">View Cart</div>
+                              <span className="option-icon">
+                                <img src="../../images/eye.svg" alt="" />
+                              </span>
+                            </div>
+                          </Link>
+                        ) : (
+                          <div
+                            className="first-option position-relative"
+                            key={item._id}
+                          >
+                            <div className="option-name">Add To Cart</div>
+                            <span
+                              onClick={() => addToCart(item._id)}
+                              className="all-dash-del option-icon text-light"
+                            >
+                              <h3>+</h3>
+                            </span>
+                          </div>
+                        )
+                      ) : (
+                        <div className="first-option position-relative">
+                          <div className="option-name">Add To Cart</div>
+                          <span
+                            onClick={() => addToCart(item._id)}
+                            className="all-dash-del option-icon text-light"
+                          >
+                            <h3>+</h3>
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="product-detail  py-2 hover">
@@ -89,8 +136,6 @@ const Productcard = () => {
               </div>
             </div>
           );
-          {
-          }
         })
       ) : (
         <Nodata message="product" />

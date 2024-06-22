@@ -5,11 +5,10 @@ const { default: slugify } = require("slugify");
 // Add Product To Cart
 exports.addCartController = async (req, res) => {
   try {
-    const { count } = await req.body;
-    const { id } = req.params;
+    const { count, proId } = await req.body;
 
     let cart = await new Cart({
-      id,
+      proId,
       count,
     });
 
@@ -79,7 +78,7 @@ exports.deleteCartController = async (req, res) => {
 // Get Product From Cart
 exports.getCartController = async (req, res) => {
   try {
-    const carts = await Cart.find({});
+    const carts = await Cart.find({}).populate("proId");
     return res.status(200).send({
       success: true,
       message: "Get all Cart Product Successfully",

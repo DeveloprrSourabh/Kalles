@@ -7,15 +7,18 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import store from "./Slices/Store";
 import { Provider } from "react-redux";
+import { CartProvider } from "./context/cart";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
-    <Router>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Router>
+    <Provider store={store}>
+      <CartProvider>
+        <Router>
+          <App />
+        </Router>
+      </CartProvider>
+    </Provider>
   </AuthProvider>
 );
 

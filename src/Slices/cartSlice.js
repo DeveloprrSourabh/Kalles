@@ -4,11 +4,10 @@ import toast from "react-hot-toast";
 import axios from "axios";
 const host = "http://localhost:8000";
 const colorSlice = createSlice({
-  name: "color",
+  name: "cart",
 
   initialState: {
     allCarts: [],
-    singleColor: {},
   },
 
   extraReducers: (builder) => {
@@ -28,14 +27,17 @@ const colorSlice = createSlice({
 export default colorSlice.reducer;
 
 // Add to Cart
-export const addCart = createAsyncThunk("cart/add", async (product) => {
-  const res = await fetch(`${host}/api/v1/product/add-to-cart/${product.id}`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(product),
-  });
+export const addCart = createAsyncThunk("cart/add", async (credentials) => {
+  const res = await fetch(
+    `${host}/api/v1/product/add-to-cart/${credentials.id}`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    }
+  );
   const data = await res.json();
 
   if (data.success) {
@@ -43,11 +45,11 @@ export const addCart = createAsyncThunk("cart/add", async (product) => {
   } else {
     toast.error(data.message);
   }
-
+  console.log(data);
   return data;
 });
 
-// Update Tag
+// Update Cart
 export const updateCart = createAsyncThunk("cart/update", async (product) => {
   const res = await fetch(
     `${host}/api/v1/product/update-to-cart/${product.id}`,
@@ -69,7 +71,7 @@ export const updateCart = createAsyncThunk("cart/update", async (product) => {
   return data;
 });
 
-// Getting All Tags
+// Getting All Carts
 export const getAllCarts = createAsyncThunk("get/carts", async () => {
   const res = await fetch(`${host}/api/v1/product/get-cart-products`, {
     method: "GET",
@@ -78,7 +80,8 @@ export const getAllCarts = createAsyncThunk("get/carts", async () => {
     },
   });
   const carts = await res.json();
-  return carts;
+  console.log(carts);
+  return carts.carts;
 });
 
 //  Delete Cart
