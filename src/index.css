@@ -252,6 +252,10 @@ li.menu-list a {
   height: 100vh;
   overflow-y: hidden;
 }
+.admin-row .navbar-nav {
+  height: 100vh;
+  overflow-y: auto;
+}
 .admin-row .col-lg-9 {
   height: 100vh;
   overflow-y: auto;

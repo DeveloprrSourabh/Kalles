@@ -26,6 +26,10 @@ import AllTags from "./pages/Admin/AllTags";
 import AddColor from "./pages/Admin/AddColor";
 import Cartpage from "./pages/Cartpage";
 import PrivateRoute from "./components/Routes/PrivateRoute";
+import CreateBlogCategory from "./pages/Admin/CreateBlogCategory";
+import CreateBlog from "./pages/Admin/CreateBlog";
+import AllBlogs from "./pages/Admin/AllBlogs";
+import UpdateBlog from "./pages/Admin/UpdateBlog";
 
 function App() {
   return (
@@ -53,6 +57,17 @@ function App() {
             path="admin/update-category/:slug"
             element={<UpdateCategory />}
           />
+          {/* Blog Category Routes  */}
+          <Route
+            path="admin/add-blog-category"
+            element={<CreateBlogCategory />}
+          />
+
+          {/* Blog Routes */}
+          <Route path="admin/add-blog" element={<CreateBlog />} />
+          <Route path="admin/all-blogs" element={<AllBlogs />} />
+          <Route path="admin/update-blog/:slug" element={<UpdateBlog />} />
+
           {/* Product Routes */}
           <Route path="admin/add-product" element={<CreateProduct />} />
           <Route path="admin/all-products" element={<AllProducts />} />

@@ -98,6 +98,33 @@ const Adminmenu = () => {
             </div>
           </div>
         </li>
+        {/* <!--Blog Category Collapse Menu --> */}
+        <li class="nav-item">
+          <Link
+            class="nav-link collapsed"
+            to={"#"}
+            data-toggle="collapse"
+            data-target="#blogcategory"
+            aria-expanded="true"
+            aria-controls="blogcategory"
+          >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Blog Category</span>
+          </Link>
+          <div
+            id="blogcategory"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Category</h6>
+              <Link class="collapse-item" to="../admin/add-blog-category">
+                Add Blog Category
+              </Link>
+            </div>
+          </div>
+        </li>
         {/* <!-- Tag Collapse Menu --> */}
         <li class="nav-item">
           <Link
@@ -148,6 +175,37 @@ const Adminmenu = () => {
               <h6 class="collapse-header">Tag</h6>
               <Link class="collapse-item" to="../admin/add-color">
                 Add Color
+              </Link>
+            </div>
+          </div>
+        </li>
+        {/* <!-- Blog Collapse Menu --> */}
+        <li class="nav-item">
+          <Link
+            class="nav-link collapsed"
+            to={"#"}
+            data-toggle="collapse"
+            data-target="#blog"
+            aria-expanded="true"
+            aria-controls="blog"
+          >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Blog</span>
+          </Link>
+          <div
+            id="blog"
+            class="collapse"
+            aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar"
+          >
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Blogs</h6>
+              <Link class="collapse-item" to="../admin/add-blog">
+                Add Blog
+              </Link>
+
+              <Link class="collapse-item" to="../admin/all-blogs">
+                All Blogs
               </Link>
             </div>
           </div>
