@@ -73,7 +73,7 @@ const Productcard = () => {
                       </Link>
                       {sets && sets.length > 0 ? (
                         sets.some((crt) => crt?.proId?._id === item._id) ? (
-                          <Link to={`../cart`}>
+                          <Link to={`../user/cart`}>
                             <div className="first-option position-relative my-3">
                               <div className="option-name">View Cart</div>
                               <span className="option-icon">

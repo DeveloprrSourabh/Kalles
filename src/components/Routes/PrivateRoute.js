@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const host = "http://localhost:8000";
 
-const Private = () => {
+const PrivateRoute = () => {
   const [ok, setOk] = useState(false);
   const [auth, setauth] = useAuth();
   useEffect(() => {
@@ -31,4 +31,4 @@ const Private = () => {
   return ok ? <Outlet></Outlet> : "Loading...";
 };
 
-export default Private;
+export default PrivateRoute;

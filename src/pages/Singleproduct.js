@@ -65,8 +65,8 @@ const Singleproduct = (req) => {
   }, []);
   // Check if the product is in the cart
   let allCart = useSelector((state) => state.cart.allCarts);
-    const isInCart =
-      allCart?.some((crt) => crt?.proId?.slug === product?.slug) || isAddedToCart;
+  const isInCart =
+    allCart?.some((crt) => crt?.proId?.slug === product?.slug) || isAddedToCart;
   // Add Product to Cart
   const addToCart = () => {
     dispatch(addCart({ ...cardentials, proId: product._id }));
@@ -181,7 +181,7 @@ const Singleproduct = (req) => {
                     </>
                   ) : (
                     <Link
-                      to="../cart"
+                      to="../user/cart"
                       className="text-light border-0 add-cart-btn effect"
                     >
                       View Cart

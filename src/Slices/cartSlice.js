@@ -85,21 +85,19 @@ export const getAllCarts = createAsyncThunk("get/carts", async () => {
 });
 
 //  Delete Cart
-export const deleteCart = createAsyncThunk("delete/cart", async (product) => {
-  const res = await fetch(
-    `${host}/api/v1/product/delete-to-cart/${product.id}`,
-    {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );
+export const deleteCart = createAsyncThunk("delete/cart", async (id) => {
+  const res = await fetch(`${host}/api/v1/product/delete-to-cart/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
   const data = await res.json();
   if (data?.success) {
     toast.success(data?.message);
   } else {
     toast.error(data?.message);
   }
-  return data;
+  console.log(data);
+  return data.cart;
 });

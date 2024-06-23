@@ -30,11 +30,10 @@ exports.addCartController = async (req, res) => {
 // Update Product In Cart
 exports.updateCartController = async (req, res) => {
   try {
-    const { count } = await req.body;
-    const { id } = req.params;
+    const { count, id } = await req.body;
     let cart = await Cart.findOne({ id });
     cart = await Cart.findByIdAndUpdate(
-      cart._id,
+      id,
       {
         count: count,
       },
@@ -65,6 +64,7 @@ exports.deleteCartController = async (req, res) => {
     return res.status(200).send({
       success: true,
       message: "Product Deleted In Cart",
+      cart,
     });
   } catch (error) {
     console.log(error);
@@ -78,7 +78,11 @@ exports.deleteCartController = async (req, res) => {
 // Get Product From Cart
 exports.getCartController = async (req, res) => {
   try {
-    const carts = await Cart.find({}).populate("proId");
+    const carts = await Cart.find({}).populate({
+      path: "proId",
+      populate: [{ path: "category" }, { path: "color" }],
+    });
+
     return res.status(200).send({
       success: true,
       message: "Get all Cart Product Successfully",

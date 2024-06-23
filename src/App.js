@@ -24,6 +24,8 @@ import UpdateCategory from "./pages/Admin/UpdateCategory";
 import AddTag from "./pages/Admin/AddTag";
 import AllTags from "./pages/Admin/AllTags";
 import AddColor from "./pages/Admin/AddColor";
+import Cartpage from "./pages/Cartpage";
+import PrivateRoute from "./components/Routes/PrivateRoute";
 
 function App() {
   return (
@@ -62,6 +64,9 @@ function App() {
           <Route path="admin/add-tag" element={<AddTag />} />
           {/* Color Routes */}
           <Route path="admin/add-color" element={<AddColor />} />
+        </Route>
+        <Route path="/user" element={<PrivateRoute />}>
+          <Route path="cart" element={<Cartpage />} />
         </Route>
       </Routes>
     </>
