@@ -9,16 +9,19 @@ import { getAllBlogCategories } from "../../Slices/blogCategorySlice";
 const UpdateBlog = () => {
   const params = useParams();
   const dispatch = useDispatch();
-
+  const [photourl, setPhotourl] = useState("");
+  const host = "http://localhost:8000";
   const singleBlog = useSelector((state) => state.blog.singleBlog);
-
+  console.log(singleBlog);
   // Fetch Blog and categories
   useEffect(() => {
     dispatch(getSingleBlog(params.slug));
     dispatch(getAllBlogCategories());
     dispatch(getAllTags());
   }, [dispatch, params.slug]);
-
+  useEffect(() => {
+    setPhotourl(`${host}/api/v1/blog/blog-photo/${singleBlog?.slug}`);
+  }, [singleBlog]);
   // Initialize states
   const [blog, setBlog] = useState({
     name: "",
@@ -107,7 +110,11 @@ const UpdateBlog = () => {
                 <div className="item-photo">
                   <label>
                     <div className="select-item-photo">
-                      {photo && <img src={URL.createObjectURL(photo)} alt="" />}
+                      {photo ? (
+                        <img src={URL.createObjectURL(photo)} alt="" />
+                      ) : (
+                        <img src={photourl} alt="" />
+                      )}
                     </div>
                     <div className="item-img-name">
                       {photo ? photo?.name.substring(0, 20) : "Upload Photo"}
@@ -172,7 +179,7 @@ const UpdateBlog = () => {
                     </div>
                   </div>
                   {/* Tags */}
-                  <div className="col-sm-6">
+                  <div className="col-sm-12 mb-2">
                     <div className="language product-drop">
                       <div className="dropdown">
                         <button

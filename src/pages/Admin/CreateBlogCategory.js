@@ -79,7 +79,7 @@ const CreateBlogCategory = () => {
       <div id="admin-category-dashboard">
         <div className="admin-profile">
           <div className="admin-row row">
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               <Adminmenu />
             </div>
             <div className="col-lg-4">

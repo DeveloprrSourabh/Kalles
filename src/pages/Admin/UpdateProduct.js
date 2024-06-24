@@ -10,9 +10,12 @@ import { getAllColors } from "../../Slices/colorSlice";
 const UpdateProduct = () => {
   const params = useParams();
   const dispatch = useDispatch();
-
+  const [photourl, setPhotourl] = useState("");
+  const host = "http://localhost:8000";
   const singleProduct = useSelector((state) => state.product.singleProduct);
-
+  useEffect(() => {
+    setPhotourl(`${host}/api/v1/product/product-photo/${singleProduct?.slug}`);
+  }, [singleProduct]);
   // Fetch product and categories
   useEffect(() => {
     dispatch(getSingleProduct(params.slug));
@@ -147,7 +150,11 @@ const UpdateProduct = () => {
                 <div className="item-photo">
                   <label>
                     <div className="select-item-photo">
-                      {photo && <img src={URL.createObjectURL(photo)} alt="" />}
+                      {photo ? (
+                        <img src={URL.createObjectURL(photo)} alt="" />
+                      ) : (
+                        <img src={photourl} alt="" />
+                      )}
                     </div>
                     <div className="item-img-name">
                       {photo ? photo?.name.substring(0, 20) : "Upload Photo"}

@@ -12,7 +12,6 @@ const AllBlogs = () => {
     dispatch(getAllBlogs());
   }, []);
   const blogs = useSelector((state) => state.blog.allBlogs);
-  console.log(blogs);
   // Delete Blog
   const handleDelete = async (e) => {
     await dispatch(deleteBlog(e));
@@ -58,9 +57,7 @@ const AllBlogs = () => {
                                 <Link to={`../admin/update-blog/${item.slug}`}>
                                   {" "}
                                   <div className="first-option position-relative my-3">
-                                    <div className="option-name">
-                                      Edit Product
-                                    </div>
+                                    <div className="option-name">Edit Blog</div>
                                     <span className="option-icon">
                                       <img src="../../images/eye.svg" alt="" />
                                     </span>
@@ -68,7 +65,7 @@ const AllBlogs = () => {
                                 </Link>
                                 <div className="first-option position-relative">
                                   <div className=" option-name">
-                                    Delete Product
+                                    Delete Blog
                                   </div>
                                   <span
                                     className="all-dash-del option-icon "
