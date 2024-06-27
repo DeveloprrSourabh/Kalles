@@ -95,7 +95,9 @@ const UpdateBlog = () => {
   };
 
   // Getting all categories, tags
-  const allCategories = useSelector((state) => state.category.allCategories);
+  const allCategories = useSelector(
+    (state) => state.blogcategory.allBlogCategories
+  );
   const allTags = useSelector((state) => state.tag.allTags);
   return (
     <div id="admin-product">

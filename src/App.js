@@ -42,7 +42,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/shop/:slug" element={<Singleproduct />} />
-        <Route path="/blog/:id" element={<Singleblog />} />
+        <Route path="/blog/:slug" element={<Singleblog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forget" element={<ForgetPasword />} />

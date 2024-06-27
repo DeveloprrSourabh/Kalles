@@ -167,7 +167,7 @@ exports.getCategoryPhotoController = async (req, res) => {
     if (!category) {
       return res.status(400).send({
         success: false,
-        message: "Category Not Found",
+        message: "Category Not Fo und",
       });
     }
     if (category.photo.data) {
