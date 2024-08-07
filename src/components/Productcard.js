@@ -6,11 +6,12 @@ import { getAllProducts } from "../Slices/productSlice";
 import toast from "react-hot-toast";
 import { useCart, CartProvider } from "../context/cart";
 import { addCart, getAllCarts } from "../Slices/cartSlice";
+import { useAuth } from "../context/auth";
 
 const Productcard = () => {
   const host = "http://localhost:8000";
   const dispatch = useDispatch();
-  const [cart, setCart] = useCart();
+  const [auth, setAuth] = useAuth();
   const [sets, setSets] = useState([]);
 
   const products = useSelector((state) => state.product.allProducts);
@@ -18,8 +19,8 @@ const Productcard = () => {
 
   useEffect(() => {
     dispatch(getAllProducts());
-    dispatch(getAllCarts());
-  }, [dispatch]);
+    dispatch(getAllCarts(auth?.user?.id));
+  }, [auth?.user?.id, dispatch]);
 
   useEffect(() => {
     setSets(allcrt);
@@ -32,8 +33,10 @@ const Productcard = () => {
 
   // Product Add To Cart
   const addToCart = async (proId) => {
-    await dispatch(addCart({ ...credentials, proId: proId }));
-    dispatch(getAllCarts());
+    await dispatch(
+      addCart({ ...credentials, proId: proId, userId: auth?.user?.id })
+    );
+    dispatch(getAllCarts(auth?.user?.id));
   };
 
   return (
@@ -73,7 +76,7 @@ const Productcard = () => {
                       </Link>
                       {sets && sets.length > 0 ? (
                         sets.some((crt) => crt?.proId?._id === item._id) ? (
-                          <Link to={`../user/cart`}>
+                          <Link to={`../dashboard/user/cart`}>
                             <div className="first-option position-relative my-3">
                               <div className="option-name">View Cart</div>
                               <span className="option-icon">

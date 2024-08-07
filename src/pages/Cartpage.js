@@ -3,23 +3,27 @@ import Layout from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCart, getAllCarts, updateCart } from "../Slices/cartSlice";
 import Nodata from "../components/Nodata";
+import { useAuth } from "../context/auth";
+import { useCart } from "../context/cart";
 
 const Cartpage = () => {
   const dispatch = useDispatch();
 
   const [sets, setSets] = useState([]);
+  const [auth, setAuth] = useAuth();
   const [active, setActive] = useState(false);
   const allcrt = useSelector((state) => state.cart.allCarts);
 
   useEffect(() => {
-    dispatch(getAllCarts());
+    dispatch(getAllCarts(auth?.user.id));
   }, [dispatch]);
 
   useEffect(() => {
     // Add quantity property to each product in the sets state
-    setSets(allcrt.map((product) => ({ ...product, quantity: product.count })));
+    setSets(
+      allcrt?.map((product) => ({ ...product, quantity: product.count }))
+    );
   }, [allcrt]);
-  console.log(sets);
 
   // Change Product Count
   const handleQuantityChange = (productId, increment) => {
@@ -40,7 +44,7 @@ const Cartpage = () => {
     dispatch(updateCart({ count, id: proId }));
   };
   // Calculate the subtotal
-  const cartSubtotal = sets.reduce((total, product) => {
+  const cartSubtotal = sets?.reduce((total, product) => {
     return total + product?.proId?.price * product.quantity;
   }, 0);
   return (
@@ -182,7 +186,7 @@ const Cartpage = () => {
                           <h2>Cart Total</h2>
                           <div className="mb-1 final-amounts d-flex justify-content-between">
                             <p className="mb-0">Cart Subtotal</p>
-                            <b>${cartSubtotal.toFixed(2)}</b>
+                            <b>${cartSubtotal?.toFixed(2)}</b>
                           </div>
                           <div className="mb-1 final-amounts d-flex justify-content-between">
                             <p className="mb-0">Shipping Charge</p>

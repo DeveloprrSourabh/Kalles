@@ -1,10 +1,8 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth";
 
-const Adminmenu = () => {
-  const [auth, setAuth] = useAuth();
+const usermenu = () => {
   return (
     <>
       <Toaster />
@@ -30,17 +28,10 @@ const Adminmenu = () => {
 
         {/* <!-- Nav Item - Dashboard --> */}
         <li class="nav-item active">
-          {auth?.user?.role === 1 ? (
-            <Link class="nav-link" to={"../admin/profile"}>
-              <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>Profile</span>
-            </Link>
-          ) : (
-            <Link class="nav-link" to={"../user/profile"}>
-              <i class="fas fa-fw fa-tachometer-alt"></i>
-              <span>Profile</span>
-            </Link>
-          )}
+          <Link class="nav-link" to={"../user/profile"}>
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Profile</span>
+          </Link>
         </li>
 
         {/* <!-- Divider --> */}
@@ -226,4 +217,4 @@ const Adminmenu = () => {
   );
 };
 
-export default Adminmenu;
+export default usermenu;

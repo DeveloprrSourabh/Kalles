@@ -5,11 +5,12 @@ const { default: slugify } = require("slugify");
 // Add Product To Cart
 exports.addCartController = async (req, res) => {
   try {
-    const { count, proId } = await req.body;
+    const { count, proId, userId } = await req.body;
 
     let cart = await new Cart({
       proId,
       count,
+      userId,
     });
 
     await cart.save();
@@ -78,7 +79,8 @@ exports.deleteCartController = async (req, res) => {
 // Get Product From Cart
 exports.getCartController = async (req, res) => {
   try {
-    const carts = await Cart.find({}).populate({
+    const { id } = req.params;
+    const carts = await Cart.find({ userId: id }).populate({
       path: "proId",
       populate: [{ path: "category" }, { path: "color" }],
     });

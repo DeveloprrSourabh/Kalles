@@ -8,6 +8,7 @@ const productSlice = createSlice({
 
   initialState: {
     allProducts: [],
+    filterProducts: [],
     singleProduct: {},
     singleProductView: {},
   },
@@ -28,6 +29,9 @@ const productSlice = createSlice({
       state.allProducts = state.allProducts.filter((e) => {
         return e._id !== action.payload._id;
       });
+    });
+    builder.addCase(getFilterProduct.fulfilled, (state, action) => {
+      state.filterProducts = action.payload;
     });
   },
 });
@@ -132,5 +136,21 @@ export const getSingleProductView = createAsyncThunk(
     const product = await res.json();
     console.log(product);
     return product.product;
+  }
+);
+// Getting Filter Products
+export const getFilterProduct = createAsyncThunk(
+  "post/filterproduct",
+  async (checked) => {
+    const res = await fetch(`${host}/api/v1/product/product-filters`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ checked }),
+    });
+    const data = await res.json();
+    console.log(data);
+    return data.products;
   }
 );

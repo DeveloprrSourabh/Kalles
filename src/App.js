@@ -30,6 +30,7 @@ import CreateBlogCategory from "./pages/Admin/CreateBlogCategory";
 import CreateBlog from "./pages/Admin/CreateBlog";
 import AllBlogs from "./pages/Admin/AllBlogs";
 import UpdateBlog from "./pages/Admin/UpdateBlog";
+import Userdashboard from "./pages/User/Userdashboard";
 
 function App() {
   return (
@@ -43,9 +44,7 @@ function App() {
         <Route path="/blog" element={<Blogpage />} />
         <Route path="/shop/:slug" element={<Singleproduct />} />
         <Route path="/blog/:slug" element={<Singleblog />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forget" element={<ForgetPasword />} />
+
         {/* Admin Routes */}
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<Admindashboard />} />
@@ -80,9 +79,16 @@ function App() {
           {/* Color Routes */}
           <Route path="admin/add-color" element={<AddColor />} />
         </Route>
-        <Route path="/user" element={<PrivateRoute />}>
-          <Route path="cart" element={<Cartpage />} />
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="user" element={<Userdashboard />} />
+          <Route path="user/profile" element={<Profile />} />
+          <Route path="user/cart" element={<Cartpage />} />
         </Route>
+
+        {/* Auth Route */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forget" element={<ForgetPasword />} />
       </Routes>
     </>
   );

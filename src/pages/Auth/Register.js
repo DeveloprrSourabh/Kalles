@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageBanner from "../../components/PageBanner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, register, updateUser } from "../../Slices/useSlice";
 import Loader from "../../components/Loader";
+import { useAuth } from "../../context/auth";
 const Register = () => {
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
   const location = useLocation();
   const page = location.pathname.replace("/", "");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    if (auth?.token) {
+      navigate("../");
+    }
+  }, [auth, navigate]);
 
   //   Input Values
   const [credentials, setCredentials] = useState({
@@ -34,7 +43,7 @@ const Register = () => {
     setDisplay("block");
     setTimeout(() => {
       setDisplay("none");
-    }, );
+    });
   };
 
   return (

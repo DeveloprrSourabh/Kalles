@@ -28,6 +28,7 @@ export default colorSlice.reducer;
 
 // Add to Cart
 export const addCart = createAsyncThunk("cart/add", async (credentials) => {
+  console.log(credentials);
   const res = await fetch(
     `${host}/api/v1/product/add-to-cart/${credentials.id}`,
     {
@@ -72,15 +73,14 @@ export const updateCart = createAsyncThunk("cart/update", async (product) => {
 });
 
 // Getting All Carts
-export const getAllCarts = createAsyncThunk("get/carts", async () => {
-  const res = await fetch(`${host}/api/v1/product/get-cart-products`, {
+export const getAllCarts = createAsyncThunk("get/carts", async (id) => {
+  const res = await fetch(`${host}/api/v1/product/get-cart-products/${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
     },
   });
   const carts = await res.json();
-  console.log(carts);
   return carts.carts;
 });
 

@@ -3,10 +3,18 @@ import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import { useCart } from "../context/cart";
+import { getAllCarts } from "../Slices/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [auth, setAuth] = useAuth();
+  const allcrt = useSelector((state) => state.cart.allCarts);
 
+  useEffect(() => {
+    dispatch(getAllCarts(auth?.user?.id));
+  }, [dispatch]);
   let announceRef = useRef(true);
   return (
     <>
@@ -133,9 +141,15 @@ const Header = () => {
                       </button>
                       <ul class="dropdown-menu py-2">
                         <li>
-                          <Link class="dropdown-item" to="/dashboard/admin">
-                            Dashboard
-                          </Link>
+                          {auth.user.role == 1 ? (
+                            <Link class="dropdown-item" to="/dashboard/admin">
+                              Dashboard
+                            </Link>
+                          ) : (
+                            <Link class="dropdown-item" to="/dashboard/user">
+                              Dashboard
+                            </Link>
+                          )}
                         </li>
                         <li>
                           <Link class="dropdown-item" href="/shop">
@@ -162,8 +176,11 @@ const Header = () => {
                 </Link>
               </div>
               <div className="icon-link">
-                <Link>
-                  <img src="../images/cart.svg" alt="" />
+                <Link to={"dashboard/user/cart"}>
+                  <div className="cart position-relative">
+                    <img src="../images/cart.svg" alt="" />
+                    <span className="cart-count">{allcrt?.length}</span>
+                  </div>
                 </Link>
               </div>
             </div>

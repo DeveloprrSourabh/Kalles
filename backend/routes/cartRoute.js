@@ -19,6 +19,6 @@ router.put("/update-to-cart/:id", updateCartController);
 router.delete("/delete-to-cart/:id", deleteCartController);
 
 // Get All Products
-router.get("/get-cart-products", getCartController);
+router.get("/get-cart-products/:id", getCartController);
 
 module.exports = router;

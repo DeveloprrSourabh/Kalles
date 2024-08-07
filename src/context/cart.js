@@ -1,18 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCarts } from "../Slices/cartSlice";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./auth";
 
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const dispatch = useDispatch();
-  const allCart = useSelector((state) => state.cart.allCarts);
+  const [auth, setAuth] = useAuth();
+  console.log(auth?.user?.id);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllCarts());
+    dispatch(getAllCarts(auth?.user?.id));
   }, [dispatch]);
-
+  const allCart = useSelector((state) => state.cart.allCarts);
   useEffect(() => {
     if (allCart) {
       setCart(JSON.stringify(allCart));

@@ -308,6 +308,17 @@ li.menu-list a {
 }
 .product-card-img {
 }
+span.cart-count {
+  position: absolute;
+  top: -13px;
+  right: -13px;
+  min-width: 23px;
+  max-height: 23px;
+  text-align: center;
+  background: #e91e63;
+  color: #fff;
+  border-radius: 50%;
+}
 .sub-heading {
   font-size: 16px;
   font-weight: 500;
@@ -694,6 +705,7 @@ ul.footer-menu-list {
 .filter-drawer li label {
   transition: all 0.3s;
   font-size: 15px;
+  text-transform: capitalize;
   color: #000;
 }
 .filter-drawer li label:hover {

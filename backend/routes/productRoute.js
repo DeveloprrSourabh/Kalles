@@ -8,6 +8,7 @@ const {
   getProductPhotoController,
   topProductController,
   getSingleProductViewController,
+  productFilterController,
 } = require("../controllers/productContoller");
 const formidable = require("express-formidable");
 
@@ -34,5 +35,7 @@ router.get("/product-photo/:slug", getProductPhotoController);
 
 // TOP 6 PRODUCTS|| METHOD GET
 router.get("/top-product", topProductController);
+// PRODUCT FILTER || METHOD POST
+router.post("/product-filters/", productFilterController);
 
 module.exports = router;

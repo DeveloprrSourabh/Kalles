@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageBanner from "../../components/PageBanner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
@@ -14,6 +14,12 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const page = location.pathname.replace("/", "");
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    if (auth?.token) {
+      navigate("../");
+    }
+  }, [auth, navigate]);
 
   //   Input Values
   const [credentails, setCredentails] = useState({

@@ -423,3 +423,30 @@ exports.topProductController = async (req, res) => {
     });
   }
 };
+
+// Product Filter
+exports.productFilterController = async (req, res) => {
+  try {
+    const { checked } = req.body;
+    let args = {};
+
+    if (checked?.length > 0) args.category = checked;
+    // if (radio?.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const products = await Product.find({ category: { $in: checked } })
+      // .populate("category")
+      .select("-photo");
+    res.status(200).send({
+      success: true,
+      message: "getting product by filter",
+      products,
+    });
+    console.log(products);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({
+      success: true,
+      message: "Error While Filtering Product",
+      error,
+    });
+  }
+};
