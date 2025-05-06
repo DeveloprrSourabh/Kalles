@@ -165,7 +165,7 @@ const Header = () => {
                     </div>
                   </div>
                 ) : (
-                  <Link>
+                  <Link to={"../login"}>
                     <img src="../images/profile.svg" alt="" />
                   </Link>
                 )}
@@ -176,7 +176,7 @@ const Header = () => {
                 </Link>
               </div>
               <div className="icon-link">
-                <Link to={"dashboard/user/cart"}>
+                <Link to={"../dashboard/user/cart"}>
                   <div className="cart position-relative">
                     <img src="../images/cart.svg" alt="" />
                     <span className="cart-count">{allcrt?.length}</span>
