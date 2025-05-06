@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/kalles/static/css/main.0f433f72.css",
-    "main.js": "/kalles/static/js/main.8f95e4db.js",
-    "static/js/453.fb105fce.chunk.js": "/kalles/static/js/453.fb105fce.chunk.js",
-    "index.html": "/kalles/index.html",
-    "main.0f433f72.css.map": "/kalles/static/css/main.0f433f72.css.map",
-    "main.8f95e4db.js.map": "/kalles/static/js/main.8f95e4db.js.map",
-    "453.fb105fce.chunk.js.map": "/kalles/static/js/453.fb105fce.chunk.js.map"
+    "main.css": "/Kalles/static/css/main.0f433f72.css",
+    "main.js": "/Kalles/static/js/main.1ee7718d.js",
+    "static/js/453.fb105fce.chunk.js": "/Kalles/static/js/453.fb105fce.chunk.js",
+    "index.html": "/Kalles/index.html",
+    "main.0f433f72.css.map": "/Kalles/static/css/main.0f433f72.css.map",
+    "main.1ee7718d.js.map": "/Kalles/static/js/main.1ee7718d.js.map",
+    "453.fb105fce.chunk.js.map": "/Kalles/static/js/453.fb105fce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0f433f72.css",
-    "static/js/main.8f95e4db.js"
+    "static/js/main.1ee7718d.js"
   ]
 }
