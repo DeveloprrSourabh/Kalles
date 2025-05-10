@@ -11,6 +11,7 @@ const blogRoute = require("./routes/blogRoute");
 const blogCategoryRoute = require("./routes/blogCategoryRoute");
 const bodyParser = require("body-parser");
 const app = express();
+const path = require("path");
 
 app.use(cors());
 app.use(express.json());
@@ -45,6 +46,12 @@ app.use("/api/v1/category", blogCategoryRoute);
 
 // Blog Route
 app.use("/api/v1/blog", blogRoute);
+
+// static files
+app.use(express.static(path.join(__dirname, "../build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+});
 
 app.listen(8000, () => {
   console.log(`Server is running on Port 8000`);
